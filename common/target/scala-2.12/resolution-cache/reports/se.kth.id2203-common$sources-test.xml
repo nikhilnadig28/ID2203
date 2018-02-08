@@ -7,7 +7,7 @@
 		revision="1.0-SNAPSHOT"
 		conf="test"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20180204175949"/>
+		date="20180208112559"/>
 	<dependencies>
 		<module organisation="se.sics.kompics.basic" name="kompics-component-netty-network">
 			<revision name="1.0.0" status="release" pubdate="20180110143238" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="14">
@@ -15,7 +15,7 @@
 				<metadata-artifact status="no" details="" size="5726" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-component-netty-network/ivy-1.0.0.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-component-netty-network/1.0.0/kompics-component-netty-network-1.0.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="kompics-component-netty-network" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="55797" time="90" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-component-netty-network/srcs/kompics-component-netty-network-1.0.0-sources.jar">
+					<artifact name="kompics-component-netty-network" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="55797" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-component-netty-network/srcs/kompics-component-netty-network-1.0.0-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-component-netty-network/1.0.0/kompics-component-netty-network-1.0.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -27,7 +27,7 @@
 				<metadata-artifact status="no" details="" size="8896" time="0" location="/Users/Nikhil/.ivy2/cache/com.barchart.udt/barchart-udt-bundle/ivy-2.3.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/barchart/udt/barchart-udt-bundle/2.3.0/barchart-udt-bundle-2.3.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="2.3.0" rev-constraint-default="2.3.0" rev-constraint-dynamic="2.3.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="barchart-udt-bundle" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="79815" time="49" location="/Users/Nikhil/.ivy2/cache/com.barchart.udt/barchart-udt-bundle/srcs/barchart-udt-bundle-2.3.0-sources.jar">
+					<artifact name="barchart-udt-bundle" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="79815" time="0" location="/Users/Nikhil/.ivy2/cache/com.barchart.udt/barchart-udt-bundle/srcs/barchart-udt-bundle-2.3.0-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/barchart/udt/barchart-udt-bundle/2.3.0/barchart-udt-bundle-2.3.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -39,7 +39,7 @@
 				<metadata-artifact status="no" details="" size="18471" time="0" location="/Users/Nikhil/.ivy2/cache/io.netty/netty-all/ivy-5.0.0.Alpha3.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/io/netty/netty-all/5.0.0.Alpha3/netty-all-5.0.0.Alpha3.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="5.0.0.Alpha3" rev-constraint-default="5.0.0.Alpha3" rev-constraint-dynamic="5.0.0.Alpha3" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="netty-all" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="2490235" time="2067" location="/Users/Nikhil/.ivy2/cache/io.netty/netty-all/srcs/netty-all-5.0.0.Alpha3-sources.jar">
+					<artifact name="netty-all" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="2490235" time="0" location="/Users/Nikhil/.ivy2/cache/io.netty/netty-all/srcs/netty-all-5.0.0.Alpha3-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/io/netty/netty-all/5.0.0.Alpha3/netty-all-5.0.0.Alpha3-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -50,7 +50,7 @@
 				<metadata-artifact status="no" details="" size="3419" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics/kompics-scala_2.12/ivy-1.0.0.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-scala_2.12/1.0.0/kompics-scala_2.12-1.0.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="kompics-scala_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="22587" time="229" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics/kompics-scala_2.12/srcs/kompics-scala_2.12-1.0.0-sources.jar">
+					<artifact name="kompics-scala_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="22587" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics/kompics-scala_2.12/srcs/kompics-scala_2.12-1.0.0-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-scala_2.12/1.0.0/kompics-scala_2.12-1.0.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -61,7 +61,7 @@
 				<metadata-artifact status="no" details="" size="3714" time="0" location="/Users/Nikhil/.ivy2/cache/com.larskroll/common-utils-scala_2.12/ivy-2.0.0.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/com/larskroll/common-utils-scala_2.12/2.0.0/common-utils-scala_2.12-2.0.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="2.0.0" rev-constraint-default="2.0.0" rev-constraint-dynamic="2.0.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="common-utils-scala_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="11723" time="47" location="/Users/Nikhil/.ivy2/cache/com.larskroll/common-utils-scala_2.12/srcs/common-utils-scala_2.12-2.0.0-sources.jar">
+					<artifact name="common-utils-scala_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="11723" time="0" location="/Users/Nikhil/.ivy2/cache/com.larskroll/common-utils-scala_2.12/srcs/common-utils-scala_2.12-2.0.0-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/com/larskroll/common-utils-scala_2.12/2.0.0/common-utils-scala_2.12-2.0.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -73,7 +73,7 @@
 				<metadata-artifact status="no" details="" size="4901" time="0" location="/Users/Nikhil/.ivy2/cache/org.scalatest/scalatest_2.12/ivy-3.0.4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.4/scalatest_2.12-3.0.4.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="3.0.4" rev-constraint-default="3.0.4" rev-constraint-dynamic="3.0.4" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="scalatest_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="1643808" time="346" location="/Users/Nikhil/.ivy2/cache/org.scalatest/scalatest_2.12/srcs/scalatest_2.12-3.0.4-sources.jar">
+					<artifact name="scalatest_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="1643808" time="0" location="/Users/Nikhil/.ivy2/cache/org.scalatest/scalatest_2.12/srcs/scalatest_2.12-3.0.4-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.4/scalatest_2.12-3.0.4-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -85,7 +85,7 @@
 				<metadata-artifact status="no" details="" size="2918" time="0" location="/Users/Nikhil/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/ivy-1.0.4.xml" searched="false" origin-is-local="false" origin-location="file:////Users/Nikhil/.sbt/preloaded/org.scala-lang.modules/scala-parser-combinators_2.12/1.0.4/ivys/ivy.xml"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.4" rev-constraint-default="1.0.4" rev-constraint-dynamic="1.0.4" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="scala-parser-combinators_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="42274" time="30" location="/Users/Nikhil/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/srcs/scala-parser-combinators_2.12-1.0.4-sources.jar">
+					<artifact name="scala-parser-combinators_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="42274" time="0" location="/Users/Nikhil/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/srcs/scala-parser-combinators_2.12-1.0.4-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.0.4/scala-parser-combinators_2.12-1.0.4-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -97,7 +97,7 @@
 				<metadata-artifact status="no" details="" size="3137" time="0" location="/Users/Nikhil/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/ivy-1.0.5.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.0.5/scala-xml_2.12-1.0.5.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.5" rev-constraint-default="1.0.5" rev-constraint-dynamic="1.0.5" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="scala-xml_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="109241" time="46" location="/Users/Nikhil/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/srcs/scala-xml_2.12-1.0.5-sources.jar">
+					<artifact name="scala-xml_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="109241" time="0" location="/Users/Nikhil/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/srcs/scala-xml_2.12-1.0.5-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.0.5/scala-xml_2.12-1.0.5-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -109,7 +109,7 @@
 				<metadata-artifact status="no" details="" size="5221" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-component-java-timer/ivy-1.0.0.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-component-java-timer/1.0.0/kompics-component-java-timer-1.0.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="kompics-component-java-timer" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="5309" time="40" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-component-java-timer/srcs/kompics-component-java-timer-1.0.0-sources.jar">
+					<artifact name="kompics-component-java-timer" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="5309" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-component-java-timer/srcs/kompics-component-java-timer-1.0.0-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-component-java-timer/1.0.0/kompics-component-java-timer-1.0.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -121,7 +121,7 @@
 				<metadata-artifact status="no" details="" size="5043" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-port-timer/ivy-1.0.0.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-port-timer/1.0.0/kompics-port-timer-1.0.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="kompics-port-timer" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="7002" time="45" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-port-timer/srcs/kompics-port-timer-1.0.0-sources.jar">
+					<artifact name="kompics-port-timer" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="7002" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-port-timer/srcs/kompics-port-timer-1.0.0-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-port-timer/1.0.0/kompics-port-timer-1.0.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -133,7 +133,7 @@
 				<metadata-artifact status="no" details="" size="5047" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-port-network/ivy-1.0.0.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-port-network/1.0.0/kompics-port-network-1.0.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="kompics-port-network" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="19627" time="73" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-port-network/srcs/kompics-port-network-1.0.0-sources.jar">
+					<artifact name="kompics-port-network" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="19627" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics.basic/kompics-port-network/srcs/kompics-port-network-1.0.0-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/se/sics/kompics/basic/kompics-port-network/1.0.0/kompics-port-network-1.0.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -145,7 +145,7 @@
 				<metadata-artifact status="no" details="" size="4111" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics/kompics-core/ivy-1.0.0.xml" searched="false" origin-is-local="false" origin-location="http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-core/1.0.0/kompics-core-1.0.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="kompics-core" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="89510" time="130" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics/kompics-core/srcs/kompics-core-1.0.0-sources.jar">
+					<artifact name="kompics-core" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="89510" time="0" location="/Users/Nikhil/.ivy2/cache/se.sics.kompics/kompics-core/srcs/kompics-core-1.0.0-sources.jar">
 						<origin-location is-local="false" location="http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-core/1.0.0/kompics-core-1.0.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -157,7 +157,7 @@
 				<metadata-artifact status="no" details="" size="2878" time="0" location="/Users/Nikhil/.ivy2/cache/com.typesafe/config/ivy-1.2.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/config/1.2.1/config-1.2.1.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="1.2.1" rev-constraint-default="1.2.1" rev-constraint-dynamic="1.2.1" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="config" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="132611" time="49" location="/Users/Nikhil/.ivy2/cache/com.typesafe/config/srcs/config-1.2.1-sources.jar">
+					<artifact name="config" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="132611" time="0" location="/Users/Nikhil/.ivy2/cache/com.typesafe/config/srcs/config-1.2.1-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/config/1.2.1/config-1.2.1-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -169,7 +169,7 @@
 				<metadata-artifact status="no" details="" size="5524" time="0" location="/Users/Nikhil/.ivy2/cache/com.google.guava/guava/ivy-18.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/google/guava/guava/18.0/guava-18.0.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="18.0" rev-constraint-default="18.0" rev-constraint-dynamic="18.0" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="guava" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="1277909" time="291" location="/Users/Nikhil/.ivy2/cache/com.google.guava/guava/srcs/guava-18.0-sources.jar">
+					<artifact name="guava" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="1277909" time="0" location="/Users/Nikhil/.ivy2/cache/com.google.guava/guava/srcs/guava-18.0-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/google/guava/guava/18.0/guava-18.0-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -181,7 +181,7 @@
 				<metadata-artifact status="no" details="" size="2581" time="0" location="/Users/Nikhil/.ivy2/cache/junit/junit/ivy-4.5.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/junit/junit/4.5/junit-4.5.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="4.5" rev-constraint-default="4.5" rev-constraint-dynamic="4.5" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="junit" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="109454" time="48" location="/Users/Nikhil/.ivy2/cache/junit/junit/srcs/junit-4.5-sources.jar">
+					<artifact name="junit" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="109454" time="0" location="/Users/Nikhil/.ivy2/cache/junit/junit/srcs/junit-4.5-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/junit/junit/4.5/junit-4.5-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -193,7 +193,7 @@
 				<metadata-artifact status="no" details="" size="2967" time="0" location="/Users/Nikhil/.ivy2/cache/org.scalactic/scalactic_2.12/ivy-3.0.5.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="3.0.5" rev-constraint-default="3.0.5" rev-constraint-dynamic="3.0.5" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="scalactic_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="201169" time="112" location="/Users/Nikhil/.ivy2/cache/org.scalactic/scalactic_2.12/srcs/scalactic_2.12-3.0.5-sources.jar">
+					<artifact name="scalactic_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="201169" time="0" location="/Users/Nikhil/.ivy2/cache/org.scalactic/scalactic_2.12/srcs/scalactic_2.12-3.0.5-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -229,7 +229,7 @@
 				<metadata-artifact status="no" details="" size="2773" time="0" location="/Users/Nikhil/.ivy2/cache/org.rogach/scallop_2.12/ivy-3.1.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/rogach/scallop_2.12/3.1.1/scallop_2.12-3.1.1.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="3.1.1" rev-constraint-default="3.1.1" rev-constraint-dynamic="3.1.1" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="scallop_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="30869" time="191" location="/Users/Nikhil/.ivy2/cache/org.rogach/scallop_2.12/srcs/scallop_2.12-3.1.1-sources.jar">
+					<artifact name="scallop_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="30869" time="0" location="/Users/Nikhil/.ivy2/cache/org.rogach/scallop_2.12/srcs/scallop_2.12-3.1.1-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/rogach/scallop_2.12/3.1.1/scallop_2.12-3.1.1-sources.jar"/>
 					</artifact>
 				</artifacts>
@@ -241,7 +241,7 @@
 				<metadata-artifact status="no" details="" size="3354" time="0" location="/Users/Nikhil/.ivy2/cache/com.typesafe.scala-logging/scala-logging_2.12/ivy-3.7.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging_2.12/3.7.2/scala-logging_2.12-3.7.2.pom"/>
 				<caller organisation="se.kth.id2203" name="common$sources" conf="test, compile, runtime" rev="3.7.2" rev-constraint-default="3.7.2" rev-constraint-dynamic="3.7.2" callerrev="1.0-SNAPSHOT"/>
 				<artifacts>
-					<artifact name="scala-logging_2.12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="9121" time="41" location="/Users/Nikhil/.ivy2/cache/com.typesafe.scala-logging/scala-logging_2.12/srcs/scala-logging_2.12-3.7.2-sources.jar">
+					<artifact name="scala-logging_2.12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="9121" time="0" location="/Users/Nikhil/.ivy2/cache/com.typesafe.scala-logging/scala-logging_2.12/srcs/scala-logging_2.12-3.7.2-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging_2.12/3.7.2/scala-logging_2.12-3.7.2-sources.jar"/>
 					</artifact>
 				</artifacts>

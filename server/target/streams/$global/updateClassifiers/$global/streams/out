@@ -3658,89 +3658,45 @@
 [0m[[0m[0mdebug[0m] [0m[0m	resolved ivy file produced in cache[0m
 [0m[[0m[0mdebug[0m] [0m[0m:: downloading artifacts ::[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] junit#junit;4.5!junit.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.scala-logging#scala-logging_2.12;3.7.2!scala-logging_2.12.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics#kompics-scala_2.12;1.0.0!kompics-scala_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.12.4!scala-library.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-component-netty-network;1.0.0!kompics-component-netty-network.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.scala-logging#scala-logging_2.12;3.7.2!scala-logging_2.12.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.guava#guava;18.0!guava.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.rogach#scallop_2.12;3.1.1!scallop_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/ch.qos.logback/logback-classic/1.2.3/srcs/logback-classic-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/ch.qos.logback/logback-core/1.2.3/srcs/logback-core-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-network;1.0.0!kompics-port-network.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics#kompics-core;1.0.0!kompics-core.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.25!slf4j-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe#config;1.2.1!config.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.larskroll#common-utils-scala_2.12;2.0.0!common-utils-scala_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.12.4!scala-reflect.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalatest#scalatest_2.12;3.0.4!scalatest_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/se.sics.kompics/kompics-scala-simulator_2.12/1.0.0/srcs/kompics-scala-simulator_2.12-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] ch.qos.logback#logback-classic;1.2.3!logback-classic.jar(src) (59ms)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.rogach#scallop_2.12;3.1.1!scallop_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-component-netty-network;1.0.0!kompics-component-netty-network.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics#kompics-scala-simulator_2.12;1.0.0!kompics-scala-simulator_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] ch.qos.logback#logback-classic;1.2.3!logback-classic.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.12.4!scala-library.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-component-java-timer;1.0.0!kompics-component-java-timer.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.sbt/preloaded/se.sics.kompics/kompics-scala-simulator_2.12/1.0.0/srcs/kompics-scala-simulator_2.12-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/org.javassist/javassist/3.20.0-GA/srcs/javassist-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried file:////Users/Nikhil/.sbt/preloaded/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.netty#netty-all;5.0.0.Alpha3!netty-all.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-timer;1.0.0!kompics-port-timer.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/org.javatuples/javatuples/1.2/srcs/javatuples-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/org/javatuples/javatuples/1.2/javatuples-1.2-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Kompics Releases: downloading http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/org/javatuples/javatuples/1.2/javatuples-1.2-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/javatuples/javatuples/1.2/javatuples-1.2-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Kompics Releases: downloading http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/javatuples/javatuples/1.2/javatuples-1.2-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for http://kompics.sics.se/maven/repository/se/sics/kompics/kompics-scala-simulator_2.12/1.0.0/kompics-scala-simulator_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/org/javatuples/javatuples/1.2/javatuples-1.2-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] se.sics.kompics#kompics-scala-simulator_2.12;1.0.0!kompics-scala-simulator_2.12.jar(src) (98ms)[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] org.javatuples#javatuples;1.2!javatuples.jar(src) (94ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/se.sics.kompics.simulator/core/1.0.0/srcs/core-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] ch.qos.logback#logback-core;1.2.3!logback-core.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.12;1.0.4!scala-parser-combinators_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.barchart.udt#barchart-udt-bundle;2.3.0!barchart-udt-bundle.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.5!scala-xml_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.25!slf4j-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-network;1.0.0!kompics-port-network.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe#config;1.2.1!config.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.netty#netty-all;5.0.0.Alpha3!netty-all.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics#kompics-core;1.0.0!kompics-core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.javassist#javassist;3.20.0-GA!javassist.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-timer;1.0.0!kompics-port-timer.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.larskroll#common-utils-scala_2.12;2.0.0!common-utils-scala_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.javatuples#javatuples;1.2!javatuples.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.12.4!scala-reflect.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] jline#jline;2.14.5!jline.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.4!scala-compiler.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.sbt/preloaded/se.sics.kompics.simulator/core/1.0.0/srcs/core-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried file:////Users/Nikhil/.sbt/preloaded/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried http://kompics.sics.se/maven/repository/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading http://kompics.sics.se/maven/repository/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Kompics Releases: downloading http://kompics.sics.se/maven/repository/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/org/javassist/javassist/3.20.0-GA/javassist-3.20.0-GA-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] org.javassist#javassist;3.20.0-GA!javassist.jar(src) (139ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] ch.qos.logback#logback-core;1.2.3!logback-core.jar(src) (220ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.barchart.udt#barchart-udt-bundle;2.3.0!barchart-udt-bundle.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Kompics Releases: downloading http://kompics.sics.se/maven/repository/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for http://kompics.sics.se/maven/repository/se/sics/kompics/simulator/core/1.0.0/core-1.0.0-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] se.sics.kompics.simulator#core;1.0.0!core.jar(src) (130ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 742ms :: artifacts dl 328ms[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT compile produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-compile.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT runtime produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-runtime.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT test produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-test.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT provided produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-provided.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT optional produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-optional.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT compile-internal produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-compile-internal.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT runtime-internal produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-runtime-internal.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT test-internal produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-test-internal.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT plugin produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-plugin.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT pom produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-pom.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT scala-tool produced in /Users/Nikhil/Downloads/id2203project18scala-master/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-scala-tool.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	resolve done (742ms resolve - 328ms download)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.simulator#core;1.0.0!core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 875ms :: artifacts dl 14ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT compile produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-compile.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT runtime produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-runtime.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT test produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-test.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT provided produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-provided.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT optional produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-optional.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT compile-internal produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-compile-internal.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT runtime-internal produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-runtime-internal.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT test-internal produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-test-internal.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT plugin produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-plugin.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT pom produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-pom.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#server$sources;1.0-SNAPSHOT scala-tool produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/target/scala-2.12/resolution-cache/reports/se.kth.id2203-server$sources-scala-tool.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	resolve done (875ms resolve - 14ms download)[0m

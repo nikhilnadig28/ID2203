@@ -2,3 +2,4 @@
 build
 compile
 test
+;reload; set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download resolveClassifiers resolveSbtClassifiers" ;*/*:dumpStructureTo /private/var/folders/6y/2121qk452tl4f9597xwy_2kw0000gp/T/sbt-structure.xml

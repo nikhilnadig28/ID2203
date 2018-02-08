@@ -4253,98 +4253,46 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies se.kth.id2203#client$sources;1.0-SNAPSHOT->org.scala-lang#scala-compiler;2.12.4 [scala-tool->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m	resolved ivy file produced in cache[0m
 [0m[[0m[0mdebug[0m] [0m[0m:: downloading artifacts ::[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe#config;1.2.1!config.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/com.lihaoyi/fastparse_2.12/1.0.0/srcs/fastparse_2.12-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/1.0.0/fastparse_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-network;1.0.0!kompics-port-network.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.guava#guava;18.0!guava.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/com.lihaoyi/fastparse-utils_2.12/1.0.0/srcs/fastparse-utils_2.12-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to /Users/Nikhil/.ivy2[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics#kompics-core;1.0.0!kompics-core.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.12/1.0.0/fastparse-utils_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] junit#junit;4.5!junit.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/Users/Nikhil/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-component-java-timer;1.0.0!kompics-component-java-timer.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.25!slf4j-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/log4j/log4j/1.2.17/srcs/log4j-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to /Users/Nikhil/.ivy2/cache[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/Users/Nikhil/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/1.0.0/fastparse_2.12-1.0.0-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/1.0.0/fastparse_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/Users/Nikhil/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-local.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/Users/Nikhil/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/Users/Nikhil/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0msettings loaded (18ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	default cache: /Users/Nikhil/.ivy2/cache[0m
-[0m[[0m[0mdebug[0m] [0m[0m	default resolver: default[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	-- 5 resolvers:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	shared [file][0m
-[0m[[0m[0mdebug[0m] [0m[0m	default [chain] [local, main][0m
-[0m[[0m[0mdebug[0m] [0m[0m	public [ibiblio][0m
-[0m[[0m[0mdebug[0m] [0m[0m	main [chain] [shared, public][0m
-[0m[[0m[0mdebug[0m] [0m[0m	local [file][0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.12/1.0.0/fastparse-utils_2.12-1.0.0-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.12/1.0.0/fastparse-utils_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/1.0.0/fastparse_2.12-1.0.0-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.12/1.0.0/fastparse-utils_2.12-1.0.0-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/1.0.0/fastparse_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] com.lihaoyi#fastparse_2.12;1.0.0!fastparse_2.12.jar(src) (40ms)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe#config;1.2.1!config.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.lihaoyi#fastparse_2.12;1.0.0!fastparse_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.lihaoyi#fastparse-utils_2.12;1.0.0!fastparse-utils_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.lihaoyi#sourcecode_2.12;0.1.4!sourcecode_2.12.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.scala-logging#scala-logging_2.12;3.7.2!scala-logging_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/org.jline/jline/3.5.1/srcs/jline-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/org/jline/jline/3.5.1/jline-3.5.1-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/com/lihaoyi/fastparse-utils_2.12/1.0.0/fastparse-utils_2.12-1.0.0-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] com.lihaoyi#fastparse-utils_2.12;1.0.0!fastparse-utils_2.12.jar(src) (44ms)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.larskroll#common-utils-scala_2.12;2.0.0!common-utils-scala_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.jline#jline;3.5.1!jline.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.12.4!scala-reflect.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.rogach#scallop_2.12;3.1.1!scallop_2.12.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics#kompics-scala_2.12;1.0.0!kompics-scala_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/org.slf4j/slf4j-log4j12/1.7.25/srcs/slf4j-log4j12-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/org/jline/jline/3.5.1/jline-3.5.1-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/jline/jline/3.5.1/jline-3.5.1-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] org.slf4j#slf4j-log4j12;1.7.25!slf4j-log4j12.jar(src) (55ms)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.12.4!scala-library.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-log4j12;1.7.25!slf4j-log4j12.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-component-netty-network;1.0.0!kompics-component-netty-network.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.barchart.udt#barchart-udt-bundle;2.3.0!barchart-udt-bundle.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-network;1.0.0!kompics-port-network.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.netty#netty-all;5.0.0.Alpha3!netty-all.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-timer;1.0.0!kompics-port-timer.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalatest#scalatest_2.12;3.0.4!scalatest_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.12;1.0.4!scala-parser-combinators_2.12.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.5!scala-xml_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.guava#guava;18.0!guava.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics#kompics-core;1.0.0!kompics-core.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-port-timer;1.0.0!kompics-port-timer.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] log4j#log4j;1.2.17!log4j.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalatest#scalatest_2.12;3.0.4!scalatest_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] junit#junit;4.5!junit.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] jline#jline;2.14.5!jline.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] se.sics.kompics.basic#kompics-component-java-timer;1.0.0!kompics-component-java-timer.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.4!scala-compiler.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried /Users/Nikhil/.ivy2/local/com.lihaoyi/sourcecode_2.12/0.1.4/srcs/sourcecode_2.12-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.1.4/sourcecode_2.12-0.1.4-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0mdownloading https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.1.4/sourcecode_2.12-0.1.4-sources.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/org/jline/jline/3.5.1/jline-3.5.1-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.1.4/sourcecode_2.12-0.1.4-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar.sha1[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/org/jline/jline/3.5.1/jline-3.5.1-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	public: downloading https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.1.4/sourcecode_2.12-0.1.4-sources.jar.sha1[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] org.jline#jline;3.5.1!jline.jar(src) (91ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.rogach#scallop_2.12;3.1.1!scallop_2.12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.12.4!scala-library.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] log4j#log4j;1.2.17!log4j.jar(src) (133ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0msha1 OK for https://repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.1.4/sourcecode_2.12-0.1.4-sources.jar[0m
-[0m[[0m[0minfo[0m] [0m[0m	[SUCCESSFUL ] com.lihaoyi#sourcecode_2.12;0.1.4!sourcecode_2.12.jar(src) (32ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 2185ms :: artifacts dl 155ms[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT compile produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-compile.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT runtime produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-runtime.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT test produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-test.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT provided produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-provided.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT optional produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-optional.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT compile-internal produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-compile-internal.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT runtime-internal produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-runtime-internal.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT test-internal produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-test-internal.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT plugin produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-plugin.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT pom produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-pom.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT scala-tool produced in /Users/Nikhil/Downloads/id2203project18scala-master/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-scala-tool.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	resolve done (2185ms resolve - 155ms download)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.12;1.0.4!scala-parser-combinators_2.12.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.25!slf4j-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 857ms :: artifacts dl 21ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT compile produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-compile.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT runtime produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-runtime.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT test produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-test.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT provided produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-provided.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT optional produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-optional.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT compile-internal produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-compile-internal.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT runtime-internal produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-runtime-internal.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT test-internal produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-test-internal.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT plugin produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-plugin.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT pom produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-pom.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	report for se.kth.id2203#client$sources;1.0-SNAPSHOT scala-tool produced in /Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/client/target/scala-2.12/resolution-cache/reports/se.kth.id2203-client$sources-scala-tool.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	resolve done (857ms resolve - 21ms download)[0m

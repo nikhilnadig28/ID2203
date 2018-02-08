@@ -7,7 +7,7 @@
 		revision="1.0-SNAPSHOT"
 		conf="test"
 		confs="compile, runtime, test, provided, optional"
-		date="20180204175912"/>
+		date="20180208112524"/>
 	<dependencies>
 		<module organisation="com.typesafe.sbteclipse" name="sbteclipse-plugin">
 			<revision name="5.2.4" status="release" pubdate="20171116160112" resolver="sbt-chain" artresolver="sbt-chain" extra-scalaVersion="2.12" extra-sbtVersion="1.0" downloaded="false" searched="false" default="false" conf="compile, default(compile)" position="94">
@@ -139,9 +139,9 @@
 			</revision>
 		</module>
 		<module organisation="org.jboss.interceptor" name="jboss-interceptor-api">
-			<revision name="1.1" status="release" pubdate="20091108174824" resolver="public" artresolver="public" homepage="" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="88">
+			<revision name="1.1" status="release" pubdate="20091108174824" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="88">
 				<license name="lgpl" url="http://repository.jboss.org/licenses/lgpl-2.1.txt"/>
-				<metadata-artifact status="successful" details="" size="3680" time="29" location="/Users/Nikhil/.ivy2/cache/org.jboss.interceptor/jboss-interceptor-api/ivy-1.1.xml" searched="true" original-local-location="/Users/Nikhil/.ivy2/cache/org.jboss.interceptor/jboss-interceptor-api/ivy-1.1.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/jboss/interceptor/jboss-interceptor-api/1.1/jboss-interceptor-api-1.1.pom"/>
+				<metadata-artifact status="no" details="" size="2691" time="0" location="/Users/Nikhil/.ivy2/cache/org.jboss.interceptor/jboss-interceptor-api/ivy-1.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/jboss/interceptor/jboss-interceptor-api/1.1/jboss-interceptor-api-1.1.pom"/>
 				<caller organisation="javax.enterprise" name="cdi-api" conf="compile, runtime" rev="1.1" rev-constraint-default="1.1" rev-constraint-dynamic="1.1" callerrev="1.0"/>
 				<artifacts>
 				</artifacts>
