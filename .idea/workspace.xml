@@ -2,72 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3429198a-b396-4608-888c-f42789b7817f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/main/scala/se/kth/id2203/components/EventuallyPerfectFailureDetector/EPFD.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/main/scala/se/kth/id2203/components/EventuallyPerfectFailureDetector/EPFDComponents.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/main/scala/se/kth/id2203/components/NetworkComponents.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/main/scala/se/kth/id2203/components/TotalOrderBroadcast/TotalOrderBroadcast.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/main/scala/se/kth/id2203/components/TotalOrderBroadcast/TotalOrderBroadcastComponents.scala" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/config-classes/$d9b68fd8595f353083e7$.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/config-classes/$d9b68fd8595f353083e7.cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/project/target/config-classes/$d9b68fd8595f353083e7.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/compile/compileIncSetup/$global/streams/inc_compile_2.12.zip" afterPath="$PROJECT_DIR$/client/target/streams/compile/compileIncSetup/$global/streams/inc_compile_2.12.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/compile/compileIncSetup/$global/streams/inc_compile_2.12.zip" afterPath="$PROJECT_DIR$/common/target/streams/compile/compileIncSetup/$global/streams/inc_compile_2.12.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/compileIncSetup/$global/streams/inc_compile_2.12.zip" afterPath="$PROJECT_DIR$/server/target/streams/compile/compileIncSetup/$global/streams/inc_compile_2.12.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/compileIncSetup/$global/streams/inc_compile_2.12.zip" afterPath="$PROJECT_DIR$/server/target/streams/test/compileIncSetup/$global/streams/inc_compile_2.12.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/compile/compileIncremental/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/compile/compileIncremental/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/compile/copyResources/$global/streams/copy-resources" afterPath="$PROJECT_DIR$/client/target/streams/compile/copyResources/$global/streams/copy-resources" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/compile/copyResources/$global/streams/out" afterPath="$PROJECT_DIR$/client/target/streams/compile/copyResources/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/compile/dependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/compile/dependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/compile/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/compile/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/compile/internalDependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/compile/internalDependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/runtime/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/runtime/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/test/definedTests/$global/streams/out" afterPath="$PROJECT_DIR$/client/target/streams/test/definedTests/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/test/dependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/test/dependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/test/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/test/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/test/fullClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/test/fullClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/test/internalDependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/client/target/streams/test/internalDependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/target/streams/test/test/$global/streams/out" afterPath="$PROJECT_DIR$/client/target/streams/test/test/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/$global/ivyConfiguration/$global/streams/out" afterPath="$PROJECT_DIR$/common/target/streams/$global/ivyConfiguration/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/compile/compileIncremental/$global/streams/export" afterPath="$PROJECT_DIR$/common/target/streams/compile/compileIncremental/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/compile/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/common/target/streams/compile/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/runtime/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/common/target/streams/runtime/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/test/definedTests/$global/streams/out" afterPath="$PROJECT_DIR$/common/target/streams/test/definedTests/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/test/dependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/common/target/streams/test/dependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/test/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/common/target/streams/test/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/test/fullClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/common/target/streams/test/fullClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/test/internalDependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/common/target/streams/test/internalDependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/target/streams/test/test/$global/streams/out" afterPath="$PROJECT_DIR$/common/target/streams/test/test/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/main/scala/se/kth/id2203/kvstore/KVStore.scala" afterPath="$PROJECT_DIR$/server/src/main/scala/se/kth/id2203/kvstore/KVStore.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/compile/$global/streams/out" afterPath="$PROJECT_DIR$/server/target/streams/compile/compile/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/compileIncremental/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/compile/compileIncremental/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/compileIncremental/$global/streams/out" afterPath="$PROJECT_DIR$/server/target/streams/compile/compileIncremental/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/copyResources/$global/streams/copy-resources" afterPath="$PROJECT_DIR$/server/target/streams/compile/copyResources/$global/streams/copy-resources" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/copyResources/$global/streams/out" afterPath="$PROJECT_DIR$/server/target/streams/compile/copyResources/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/dependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/compile/dependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/compile/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/compile/internalDependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/compile/internalDependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/runtime/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/runtime/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/compileIncremental/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/test/compileIncremental/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/compileIncremental/$global/streams/out" afterPath="$PROJECT_DIR$/server/target/streams/test/compileIncremental/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/copyResources/$global/streams/copy-resources" afterPath="$PROJECT_DIR$/server/target/streams/test/copyResources/$global/streams/copy-resources" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/copyResources/$global/streams/out" afterPath="$PROJECT_DIR$/server/target/streams/test/copyResources/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/definedTests/$global/streams/out" afterPath="$PROJECT_DIR$/server/target/streams/test/definedTests/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/dependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/test/dependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/test/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/fullClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/test/fullClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/internalDependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/server/target/streams/test/internalDependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/test/$global/streams/out" afterPath="$PROJECT_DIR$/server/target/streams/test/test/$global/streams/out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/streams/test/test/$global/streams/succeeded_tests" afterPath="$PROJECT_DIR$/server/target/streams/test/test/$global/streams/succeeded_tests" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/target/test-reports/se.kth.id2203.simulation.OpsTest.xml" afterPath="$PROJECT_DIR$/server/target/test-reports/se.kth.id2203.simulation.OpsTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/.history" afterPath="$PROJECT_DIR$/target/.history" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/compile/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/runtime/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/runtime/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/test/dependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/test/dependencyClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/test/exportedProducts/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/test/exportedProducts/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/test/fullClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/test/fullClasspath/$global/streams/export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/test/internalDependencyClasspath/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/test/internalDependencyClasspath/$global/streams/export" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/client/target/" />
@@ -548,12 +483,12 @@
       <updated>1518085419962</updated>
       <workItem from="1518085422080" duration="469000" />
       <workItem from="1518339376936" duration="1975000" />
-      <workItem from="1519380653497" duration="8357000" />
+      <workItem from="1519380653497" duration="8554000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12663000" />
+    <option name="totallyTimeSpent" value="12860000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
