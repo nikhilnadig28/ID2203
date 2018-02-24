@@ -1,0 +1,5 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/Nikhil/Documents/Class Work/Distributed Systems Advanced/ID2203/server/src/main/scala/se/kth/id2203/components/TotalOrderBroadcast/TotalOrderBroadcast.scala:9:13: type arguments [se.kth.id2203.components.TotalOrderBroadcast.TotalOrderBroadcast] conform to the bounds of none of the overloaded alternatives of[0m
+[0m[[0m[31merror[0m] [0m[0m value provides: [P <: se.sics.kompics.PortType](implicit evidence$2: reflect.runtime.universe.TypeTag[P])se.sics.kompics.sl.NegativePort[P] <and> [P <: se.sics.kompics.PortType](port: P)se.sics.kompics.sl.NegativePort[P] <and> [P <: se.sics.kompics.PortType](x$1: Class[P])se.sics.kompics.Negative[P][0m
+[0m[[0m[31merror[0m] [0m[0m  val tob = provides[TotalOrderBroadcast][0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

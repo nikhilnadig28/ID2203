@@ -23,16 +23,22 @@
  */
 package se.kth.id2203.kvstore;
 
-import se.kth.id2203.networking._;
-import se.kth.id2203.overlay.Routing;
-import se.sics.kompics.sl._;
+import se.kth.id2203.components.TotalOrderBroadcast.TotalOrderBroadcast
+import se.kth.id2203.networking._
+import se.kth.id2203.overlay.Routing
+import se.sics.kompics.sl._
 import se.sics.kompics.network.Network;
+
 
 class KVService extends ComponentDefinition {
 
   //******* Ports ******
   val net = requires[Network];
   val route = requires(Routing);
+
+  //TODO Implement Total Order Broadcast
+  //val tob = requires[TotalOrderBroadcast]
+
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   //******* Handlers ******
