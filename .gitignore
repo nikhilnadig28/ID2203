@@ -1,2 +1,8 @@
 
 \.idea/
+
+server/target/
+
+server/src/main/resources/
+
+server/src/test/resources/
