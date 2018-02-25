@@ -1,4 +1,4 @@
-package se.kth.id2203.components.EventuallyPerfectFailureDetector
+package se.kth.id2203.components.EPFD
 
 
 import se.kth.id2203.networking.NetAddress

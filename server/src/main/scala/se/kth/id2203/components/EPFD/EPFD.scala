@@ -1,10 +1,10 @@
-package se.kth.id2203.components.EventuallyPerfectFailureDetector
+package se.kth.id2203.components.EPFD
 
 import se.sics.kompics.network._
 import se.sics.kompics.sl.{Init, _}
 import se.sics.kompics.timer.{ScheduleTimeout, Timer}
 import se.sics.kompics.Start
-import se.kth.id2203.components.EventuallyPerfectFailureDetector.EPFDComponents._
+import se.kth.id2203.components.EPFD.EPFDComponents._
 import se.kth.id2203.networking.{NetMessage, NetAddress}
 
 

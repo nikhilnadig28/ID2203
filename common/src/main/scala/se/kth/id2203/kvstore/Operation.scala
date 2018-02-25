@@ -23,8 +23,12 @@
  */
 package se.kth.id2203.kvstore
 
-import java.util.UUID;
-import se.sics.kompics.KompicsEvent;
+import java.util.UUID
+
+import se.kth.id2203.kvstore.OpCode.{Ok, OpCode}
+import se.kth.id2203.networking.NetAddress
+import se.sics.kompics.KompicsEvent
+
 
 trait Operation extends KompicsEvent {
   def id: UUID;
@@ -37,9 +41,13 @@ case class Op(key: String, id: UUID = UUID.randomUUID()) extends Operation with 
 }
 
 object OpCode {
+
   sealed trait OpCode;
+
   case object Ok extends OpCode;
+
   case object NotFound extends OpCode;
+
   case object NotImplemented extends OpCode;
 }
 
@@ -48,5 +56,29 @@ trait OperationResponse extends KompicsEvent {
   def status: OpCode.OpCode;
 }
 
+trait Invoke extends Operation {
+  val value: String
+}
+
+trait Response extends Operation {
+  val status: OpCode
+}
+
+
 @SerialVersionUID(0x0227a2aea45e5e75L)
 case class OpResponse(id: UUID, status: OpCode.OpCode) extends OperationResponse with Serializable;
+
+case class Connect(id: UUID) extends KompicsEvent
+
+case class Ack(id: UUID, clusterSize: Int) extends KompicsEvent
+
+
+case class GetInvoke(id: UUID, key: String , value: String) extends Invoke
+
+case class GetResponse(id: UUID, key: Option[String], status: OpCode = Ok) extends Response
+
+case class PutInvoke(id: UUID, key: String, value: String) extends Invoke
+
+case class PutResponse(id: UUID, key: Option[String], status: OpCode = Ok) extends Response
+
+case class CASOperation(id: UUID, key: String, refValue: String) extends Operation

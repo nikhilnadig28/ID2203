@@ -24,28 +24,26 @@
 package se.kth.id2203.kvstore;
 
 import se.kth.id2203.components.Broadcast.CRB.WaitingCRB
-import se.kth.id2203.networking._
-import se.kth.id2203.overlay.Routing
-import se.sics.kompics.sl._
+import se.kth.id2203.components.NetworkComponents.CRB_Broadcast
 import se.sics.kompics.network.Network
+import se.kth.id2203.networking._
+import se.sics.kompics.sl._
 
 
 class KVStore extends ComponentDefinition {
 
   //******* Ports ******
-  val net = requires[Network];
-  val route = requires(Routing);
-
-  //TODO WaitingCRB
+  val net = requires[Network]
+  val route = requires[Routing]
   val crb = requires[WaitingCRB]
+
 
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   //******* Handlers ******
-  net uponEvent {
-    case NetMessage(header, op: Op) => handle {
-      log.info("Got operation {}! Now implement me please :)", op);
-      trigger(NetMessage(self, header.src, op.response(OpCode.NotImplemented)) -> net);
+  route uponEvent {
+    case txt@WrappedOperation(from , op:Operation ) => handle {
+      trigger(CRB_Broadcast(txt) ->  crb)
     }
   }
 }
