@@ -25,17 +25,25 @@ package se.kth.id2203.kvstore;
 
 import se.kth.id2203.components.Broadcast.CRB.WaitingCRB
 import se.kth.id2203.components.NetworkComponents.CRB_Broadcast
-import se.sics.kompics.network.Network
 import se.kth.id2203.networking._
+import se.kth.id2203.overlay.Routing
+import se.sics.kompics.sl._
+import se.sics.kompics.network.Network
+
+import   se.kth.id2203.bootstrapping.Bootstrapping
+
+import se.kth.id2203.components.NetworkComponents._
+import se.kth.id2203.networking.NetAddress
 import se.sics.kompics.sl._
 
 
 class KVStore extends ComponentDefinition {
 
   //******* Ports ******
-  val net = requires[Network]
+  val pLink = requires[PerfectLink]
   val route = requires[Routing]
   val crb = requires[WaitingCRB]
+  val boot = requires[Bootstrapping]
 
 
   //******* Fields ******

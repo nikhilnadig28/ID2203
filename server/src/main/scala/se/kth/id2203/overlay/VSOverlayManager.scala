@@ -23,12 +23,16 @@
  */
 package se.kth.id2203.overlay;
 
-import se.kth.id2203.bootstrapping._;
-import se.kth.id2203.networking._;
-import se.sics.kompics.sl._;
-import se.sics.kompics.network.Network;
-import se.sics.kompics.timer.Timer;
-import util.Random;
+import java.util.Random
+
+import se.kth.id2203.bootstrapping._
+import se.kth.id2203.components.EPFD.EPFDComponents.{EventuallyPerfectFailureDetector, Restore, Suspect}
+import se.kth.id2203.components.NetworkComponents.{BestEffortBroadcast, PerfectLink}
+import se.kth.id2203.networking._
+import se.sics.kompics.sl._
+import se.sics.kompics.network.Network
+import se.sics.kompics.timer.Timer
+
 
 /**
  * The V(ery)S(imple)OverlayManager.
@@ -40,6 +44,8 @@ import util.Random;
  * <p>
  * @author Lars Kroll <lkroll@kth.se>
  */
+
+//TODO
 class VSOverlayManager extends ComponentDefinition {
 
   //******* Ports ******
@@ -47,6 +53,10 @@ class VSOverlayManager extends ComponentDefinition {
   val boot = requires(Bootstrapping);
   val net = requires[Network];
   val timer = requires[Timer];
+
+  val epfd = requires[EventuallyPerfectFailureDetector]
+  val beb = requires[BestEffortBroadcast]
+
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   private var lut: Option[LookupTable] = None;

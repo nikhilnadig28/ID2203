@@ -39,70 +39,8 @@ object NetworkComponents {
 
   case class CRB_Broadcast(payload: KompicsEvent) extends KompicsEvent
 
-  case class DataMessage(timestamp: VectorClock, payload: KompicsEvent) extends KompicsEvent;
-
   class CausalOrderReliableBroadcast extends Port {
     indication[CRB_Deliver]
     request[CRB_Broadcast]
   }
-  case class VectorClock(var vc: Map[NetAddress, Int]) {
-
-    def inc(addr: NetAddress) = {
-      vc = vc + ((addr, vc.get(addr).get + 1))
-    }
-
-    def set(addr: NetAddress, value: Int) = {
-      vc = vc + ((addr, value))
-    }
-
-    def <=(that: VectorClock): Boolean = vc.foldLeft[Boolean](true)((leq, entry) => leq & (entry._2 <= that.vc.getOrElse(entry._1, entry._2)))
-
-  }
-  object VectorClock {
-
-    def empty(topology: scala.Seq[NetAddress]): VectorClock = {
-      VectorClock(topology.foldLeft[Map[NetAddress, Int]](Map[NetAddress, Int]())((mp, addr) => mp + ((addr, 0))))
-    }
-
-    def apply(that: VectorClock): VectorClock = {
-      VectorClock(that.vc)
-    }
-
-  }
-
-//  case class AR_Read_Request() extends KompicsEvent
-//
-//  case class AR_Read_Response(value: Option[Any]) extends KompicsEvent
-//
-//  case class AR_Write_Request(value: Any) extends KompicsEvent
-//
-//  case class AR_Write_Response() extends KompicsEvent
-//
-//  class AtomicRegister extends Port {
-//    request[AR_Read_Request]
-//    request[AR_Write_Request]
-//    indication[AR_Read_Response]
-//    indication[AR_Write_Response]
-//  }
-//
-//  case class C_Decide(value: Any) extends KompicsEvent
-//
-//  case class C_Propose(value: Any) extends KompicsEvent
-//
-//  class Consensus extends Port {
-//    request[C_Propose]
-//    indication[C_Decide]
-//  }
-//
-//  case class AC_Propose(value: Any) extends KompicsEvent
-//
-//  case class AC_Decide(value: Any) extends KompicsEvent
-//
-//  case object AC_Abort extends KompicsEvent
-//
-//  class AbortableConsensus extends Port {
-//    request[AC_Propose]
-//    indication[AC_Decide]
-//    indication(AC_Abort)
-//  }
 }
