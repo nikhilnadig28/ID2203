@@ -23,15 +23,15 @@
  */
 package se.kth.id2203.client;
 
-import se.kth.id2203.kvstore.ClientService;
+import se.kth.id2203.kvstore.ClientService
 import se.kth.id2203.networking._
-import se.sics.kompics.sl._;
-import se.sics.kompics.Init;
-import se.sics.kompics.network.Network;
-import se.sics.kompics.network.netty._;
-import se.sics.kompics.timer.Timer;
-import se.sics.kompics.timer.java.JavaTimer;
-
+import se.sics.kompics.sl._
+import se.sics.kompics.Init
+import se.sics.kompics.network.Network
+import se.sics.kompics.network.netty._
+import se.sics.kompics.timer.Timer
+import se.sics.kompics.timer.java.JavaTimer
+import se.kth.id2203.PerfectP2PLink
 class ParentComponent extends ComponentDefinition {
 
   val self = cfg.getValue[NetAddress]("id2203.project.address");
@@ -39,7 +39,10 @@ class ParentComponent extends ComponentDefinition {
   val net = create(classOf[NettyNetwork], new NettyInit(self));
   val client = create(classOf[ClientService], Init.NONE);
 
+  val pLink = create(classOf[PerfectP2PLink], Init.NONE);
+
   connect[Timer](timer -> client);
   connect[Network](net -> client);
 
 }
+

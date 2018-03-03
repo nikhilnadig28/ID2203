@@ -23,11 +23,13 @@
  */
 package se.kth.id2203.overlay;
 
-import java.util.Random
+import java.awt.image.LookupTable
 
+import scala.util.Random
 import se.kth.id2203.bootstrapping._
 import se.kth.id2203.components.EPFD.EPFDComponents.{EventuallyPerfectFailureDetector, Restore, Suspect}
 import se.kth.id2203.components.NetworkComponents.{BestEffortBroadcast, PerfectLink}
+//import se.kth.id2203.kvstore.{OpResponse, OperationResponse}
 import se.kth.id2203.networking._
 import se.sics.kompics.sl._
 import se.sics.kompics.network.Network
@@ -40,7 +42,7 @@ import se.sics.kompics.timer.Timer
  * Keeps all nodes in a single partition in one replication group.
  * <p>
  * Note: This implementation does not fulfill the project task. You have to
- * support multiple partitions!
+  * support multiple partitions!
  * <p>
  * @author Lars Kroll <lkroll@kth.se>
  */
@@ -57,24 +59,46 @@ class VSOverlayManager extends ComponentDefinition {
   val epfd = requires[EventuallyPerfectFailureDetector]
   val beb = requires[BestEffortBroadcast]
 
+  var suspect : Set[NetAddress] = Set()
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   private var lut: Option[LookupTable] = None;
+  var range = (0,0)
   //******* Handlers ******
   boot uponEvent {
     case GetInitialAssignments(nodes) => handle {
       log.info("Generating LookupTable...");
-      val lut = LookupTable.generate(nodes);
-      logger.debug("Generated assignments:\n$lut");
+      val lut = LookupTable.generate(nodes); //Is the nodes here the replication factor?
+      logger.debug("Generated assignments:\n$lut")
       trigger (new InitialAssignments(lut) -> boot);
     }
     case Booted(assignment: LookupTable) => handle {
       log.info("Got NodeAssignment, overlay ready.");
       lut = Some(assignment);
+//      for (r <- lut.get.partitions.keySet){
+//        if (lut.get.partitions(r).contains(self)){
+//          range = r;
+//        }
+//      }
+    }
+  }
+
+  epfd uponEvent {
+    case Suspect(add) => handle {
+      suspect += add // Add the node when you suspect it to fail
+    }
+    case Restore(add) => handle {
+      suspect -= add // Remove it when it restores
     }
   }
 
   net uponEvent {
+
+    //WTF NEEDS TO BE DONE HERE!!!
+
+//    case NetMessage(source, opRes: OpResponse) => handle {
+//      trigger(NetMessage(source, opRes.operation.clientAddress, opRes) -> net)
+//    }
     case NetMessage(header, RouteMsg(key, msg)) => handle {
       val nodes = lut.get.lookup(key);
       assert(!nodes.isEmpty);

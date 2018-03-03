@@ -23,19 +23,21 @@
  */
 package se.kth.id2203.kvstore;
 
-import java.util.UUID;
-import se.kth.id2203.networking._;
+import java.util.UUID
 
-import se.kth.id2203.overlay._;
-import se.sics.kompics.sl._;
-import se.sics.kompics.{ Start, Kompics, KompicsEvent };
-import se.sics.kompics.network.Network;
-import se.sics.kompics.timer._;
-import collection.mutable;
-import concurrent.{ Promise, Future };
+import se.kth.id2203.kvstore.OpCode.{Ok, OpCode}
+import se.kth.id2203.networking._
+import se.kth.id2203.overlay._
+import se.sics.kompics.sl._
+import se.sics.kompics.{Kompics, KompicsEvent, Start}
+import se.sics.kompics.network.Network
+import se.sics.kompics.timer._
+
+import collection.mutable
+import concurrent.{Future, Promise};
 
 case class ConnectTimeout(spt: ScheduleTimeout) extends Timeout(spt);
-case class OpWithPromise(op: Operation, promise: Promise[OpResponse] = Promise()) extends KompicsEvent;
+case class OpWithPromise(op: OpResponse, promise: Promise[OpResponse] = Promise()) extends KompicsEvent;
 
 class ClientService extends ComponentDefinition {
 
@@ -47,7 +49,7 @@ class ClientService extends ComponentDefinition {
   val server = cfg.getValue[NetAddress]("id2203.project.bootstrap-address");
   private var connected: Option[ConnectAck] = None;
   private var timeoutId: Option[UUID] = None;
-  private val pending = mutable.SortedMap.empty[UUID, Promise[OpResponse]];
+  private val pending = mutable.SortedMap.empty[String, Promise[OpResponse]];
 
   //******* Handlers ******
   ctrl uponEvent {
@@ -75,9 +77,9 @@ class ClientService extends ComponentDefinition {
       val tc = new Thread(c);
       tc.start();
     }
-    case NetMessage(header, or @ OpResponse(id, status)) => handle {
+    case NetMessage(header, or @ OpResponse(id, value, status, answer)) => handle {
       log.debug(s"Got OpResponse: $or");
-      pending.remove(id) match {
+      pending.remove(id.toString) match {
         case Some(promise) => promise.success(or);
         case None          => log.warn(s"ID $id was not pending! Ignoring response.");
       }
@@ -98,14 +100,14 @@ class ClientService extends ComponentDefinition {
 
   loopbck uponEvent {
     case OpWithPromise(op, promise) => handle {
-      val rm = RouteMsg(op.key, op); // don't know which partition is responsible, so ask the bootstrap server to forward it
+      val rm = RouteMsg(op.id.toString, op); // don't know which partition is responsible, so ask the bootstrap server to forward it
       trigger(NetMessage(self, server, rm) -> net);
-      pending += (op.id -> promise);
+      pending += (op.id.toString -> promise);
     }
   }
 
   def op(key: String): Future[OpResponse] = {
-    val op = Op(key);
+    val op = OpResponse();//key, Some(UUID.randomUUID()), Ok)
     val owf = OpWithPromise(op);
     trigger(owf -> onSelf);
     owf.promise.future

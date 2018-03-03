@@ -23,35 +23,87 @@
  */
 package se.kth.id2203.kvstore;
 
-import se.kth.id2203.components.Broadcast.CRB.WaitingCRB
+import se.kth.id2203.bootstrapping.Bootstrapping
 import se.kth.id2203.components.NetworkComponents.CRB_Broadcast
-import se.kth.id2203.networking._
-import se.kth.id2203.overlay.Routing
-import se.sics.kompics.sl._
-import se.sics.kompics.network.Network
-
-import   se.kth.id2203.bootstrapping.Bootstrapping
-
 import se.kth.id2203.components.NetworkComponents._
-import se.kth.id2203.networking.NetAddress
+import se.kth.id2203.kvstore.OpCode.{Failure, NotFound, Ok}
+import se.kth.id2203.networking.{NetAddress, NetMessage}
 import se.sics.kompics.sl._
+
+import scala.collection.mutable
 
 
 class KVStore extends ComponentDefinition {
 
   //******* Ports ******
   val pLink = requires[PerfectLink]
-  val route = requires[Routing]
-  val crb = requires[WaitingCRB]
-  val boot = requires[Bootstrapping]
+  //  val route = requires[Routing]
+  val beb = requires[BestEffortBroadcast]
+  val boot = requires(Bootstrapping)
 
 
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
+
+  val data: mutable.HashMap[String, String] = mutable.HashMap()
+
   //******* Handlers ******
-  route uponEvent {
-    case txt@WrappedOperation(from , op:Operation ) => handle {
-      trigger(CRB_Broadcast(txt) ->  crb)
-    }
+  //  route uponEvent {
+  //   todo
+  //  }
+
+  pLink uponEvent {
+
+    case PL_Deliver(leader, operation : Op) if operation.requestType == "get"  => handle {
+    val value = data.get(operation.key)
+      trigger(PL_Send(leader, operation.response(Ok, value.toString())) -> pLink)
+
+
+    /* Send the NetAddress and Operation, but how?
+  - Have another case class to send the NetAddress and the kind of operation?
+  - Write each separately? Would that even work? Doubtful.
+
+  - Any idea at this point would be GREAT!
+ */
+  // Get operation and trigger the response to the network
+  }
+
+    case PL_Deliver(leader, operation : Op) if operation.requestType == "put"  => handle {
+
+    // PUT operation.
+    data(operation.key) = operation.value
+      trigger(PL_Send(leader, operation.response(Ok, "Value Inserted")) -> pLink)
+  }
+
+    case PL_Deliver(leader, operation : Op) if operation.requestType == "cas"  => handle {
+
+    // CAS
+    val key = operation.key
+    val oldVal = operation.refVal
+    val newVal = operation.newVal
+    if(data.contains(operation.key))
+    {
+    //Compare oldvalue with val in storage
+      //if same, update
+      //else, throw error!
+      if(data(key).equals(oldVal))
+      {
+        data(key) = newVal
+        //Trigger success
+        trigger(PL_Send(leader, operation.response(Ok, newVal.toString())) -> pLink)
+      }
+      else
+        {
+          //Trigger CAS Failure
+          trigger(PL_Send(leader, operation.response(Failure, "CAS old Value not equal to input")) -> pLink)
+
+        }
+  }
+      else
+      {
+        //Trigger Value not found
+        trigger(PL_Send(leader, operation.response(NotFound, "key : value not found")) -> pLink)
+      }
+  }
   }
 }

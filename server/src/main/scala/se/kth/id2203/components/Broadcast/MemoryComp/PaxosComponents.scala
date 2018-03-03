@@ -1,10 +1,10 @@
 package se.kth.id2203.components.Broadcast
 
-import se.kth.id2203.components.Broadcast.MemoryComp.{C_Decide, C_Propose}
+import se.kth.id2203.components.Broadcast.PaxosComponents.{C_Propose, C_Decide}
 import se.sics.kompics.KompicsEvent
 import se.sics.kompics.sl.Port
 
-package object MemoryComp {
+package object PaxosComponents {
 
   case class Prepare(proposalBallot: (Int, Int)) extends KompicsEvent;
   case class Promise(promiseBallot: (Int, Int), acceptedBallot: (Int, Int), acceptedValue: Option[Any]) extends KompicsEvent;
@@ -15,6 +15,7 @@ package object MemoryComp {
 
   case class C_Decide(value: Any) extends KompicsEvent;
   case class C_Propose(value: Any) extends KompicsEvent;
+  implicit def addComparators[A](x: A)(implicit o: math.Ordering[A]): o.Ops = o.mkOrderingOps(x);
 }
 
 class Consensus extends Port{

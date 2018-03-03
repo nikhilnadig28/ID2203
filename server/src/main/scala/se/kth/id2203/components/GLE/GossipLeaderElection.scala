@@ -1,4 +1,4 @@
-package se.kth.id2203.components.BLE
+package se.kth.id2203.components.GLE
 
 import se.kth.id2203.components.GLEComponents._
 import se.kth.id2203.{PL_Deliver, PL_Send, PerfectLink}
@@ -43,10 +43,6 @@ class GossipLeaderElection(init: Init[GossipLeaderElection]) extends ComponentDe
     scheduledTimeout.setTimeoutEvent(CheckTimeout(scheduledTimeout));
     trigger(scheduledTimeout -> timer);
   }
-
-  //   private def checkLeader() {
-  //       /* INSERT YOUR CODE HERE */
-  //   }
 
   private def findtop()
   {

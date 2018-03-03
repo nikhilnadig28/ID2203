@@ -1,6 +1,7 @@
 package se.kth.id2203.components.Broadcast.BEB
 
 
+import se.kth.id2203.{PL_Deliver, PL_Send, PerfectLink}
 import se.kth.id2203.components.NetworkComponents._
 import se.kth.id2203.networking.NetAddress
 import se.sics.kompics.sl._

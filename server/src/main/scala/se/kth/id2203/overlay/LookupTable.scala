@@ -23,10 +23,13 @@
  */
 package se.kth.id2203.overlay;
 
-import com.larskroll.common.collections._;
-import java.util.Collection;
-import se.kth.id2203.bootstrapping.NodeAssignment;
-import se.kth.id2203.networking.NetAddress;
+import com.larskroll.common.collections._
+import java.util.Collection
+
+import se.kth.id2203.bootstrapping.NodeAssignment
+import se.kth.id2203.networking.NetAddress
+
+import scala.collection.mutable.ListBuffer;
 
 @SerialVersionUID(0x57bdfad1eceeeaaeL)
 class LookupTable extends NodeAssignment with Serializable {
@@ -57,9 +60,21 @@ class LookupTable extends NodeAssignment with Serializable {
 }
 
 object LookupTable {
-  def generate(nodes: Set[NetAddress]): LookupTable = {
-    val lut = new LookupTable();
-    lut.partitions ++= (0 -> nodes);
+  def generate(nodes: Set[NetAddress]) :  LookupTable = {
+
+    val lut = new LookupTable()
+
+    var tempnodes : Set[NetAddress] = nodes
+    var l : Int = 0
+
+
+    while(!tempnodes.isEmpty)
+    {
+      val temp : Set[NetAddress] = tempnodes.take(3)
+      tempnodes = tempnodes -- temp
+      lut.partitions ++= ((l) -> temp)
+      l += 500
+    }
     lut
   }
 }

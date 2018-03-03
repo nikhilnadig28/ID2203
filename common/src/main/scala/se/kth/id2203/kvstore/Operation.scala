@@ -30,15 +30,19 @@ import se.kth.id2203.networking.NetAddress
 import se.sics.kompics.KompicsEvent
 
 
-trait Operation extends KompicsEvent {
-  def id: UUID;
-  def key: String;
-}
+//trait Operation extends KompicsEvent {
+//  def id: String;
+//  def key: String;
+//  def clientAddress: NetAddress
+//  def generateID() = {
+//    UUID.randomUUID().toString
+//  }
+//}
 
-@SerialVersionUID(0xfacc6612da2139eaL)
-case class Op(key: String, id: UUID = UUID.randomUUID()) extends Operation with Serializable {
-  def response(status: OpCode.OpCode): OpResponse = OpResponse(id, status);
-}
+//@SerialVersionUID(0xfacc6612da2139eaL)
+//case class Op(key: String, id: UUID = UUID.randomUUID()) extends Operation with Serializable {
+//  def response(status: OpCode.OpCode): OpResponse = OpResponse(id, status);
+//}
 
 object OpCode {
 
@@ -48,37 +52,48 @@ object OpCode {
 
   case object NotFound extends OpCode;
 
+  case object Failure extends OpCode;
+
   case object NotImplemented extends OpCode;
 }
 
+trait Operation extends KompicsEvent {
+  def id: UUID;
+  def key : String;
+  def requestType: String;
+  def value : String = "NULL";
+  def refVal : String = "NULL";
+  def newVal : String = "NULL";
+
+}
 trait OperationResponse extends KompicsEvent {
   def id: UUID;
   def status: OpCode.OpCode;
+  def response : String;
+
 }
 
-trait Invoke extends Operation {
-  val value: String
+@SerialVersionUID(0xfacc6612da2139eaL)
+case class Op(key: String, id: UUID = UUID.randomUUID(), requestType : String , override var value : String = "NULL",
+              override var refVal : String = "NULL", override var newVal : String = "NULL") extends Operation with Serializable {
+  def response(status: OpCode.OpCode, response : String ): OpResponse = OpResponse(id, status, response);
 }
-
-trait Response extends Operation {
-  val status: OpCode
-}
-
 
 @SerialVersionUID(0x0227a2aea45e5e75L)
-case class OpResponse(id: UUID, status: OpCode.OpCode) extends OperationResponse with Serializable;
+case class OpResponse(id: UUID, status: OpCode.OpCode, response : String) extends OperationResponse with Serializable;
 
-case class Connect(id: UUID) extends KompicsEvent
-
-case class Ack(id: UUID, clusterSize: Int) extends KompicsEvent
-
-
-case class GetInvoke(id: UUID, key: String , value: String) extends Invoke
-
-case class GetResponse(id: UUID, key: Option[String], status: OpCode = Ok) extends Response
-
-case class PutInvoke(id: UUID, key: String, value: String) extends Invoke
-
-case class PutResponse(id: UUID, key: Option[String], status: OpCode = Ok) extends Response
-
-case class CASOperation(id: UUID, key: String, refValue: String) extends Operation
+//@SerialVersionUID(0x0227a2aea45e5e75L)
+//case class OpResponse(id: UUID, key: Option[String], status: OpCode.OpCode, operation: Operation) extends OperationResponse with Serializable;
+//
+//case class Connect(id: String) extends KompicsEvent
+//
+//case class Ack(id: String, clusterSize: Int) extends KompicsEvent
+//
+//case class Get(key: String, id: String, clientAddress: NetAddress) extends Operation
+//
+//case class Put(key: String, value: String, id: String, clientAddress: NetAddress) extends Operation
+//
+//case class CAS(key: String, oldVal: String, newVal: String, id: String, clientAddress: NetAddress) extends Operation
+//
+//case class GenericOp(id: NetAddress, operation: Operation) extends KompicsEvent
+//
