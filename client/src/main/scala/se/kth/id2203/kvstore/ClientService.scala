@@ -25,7 +25,7 @@ package se.kth.id2203.kvstore;
 
 import java.util.UUID
 
-import se.kth.id2203.kvstore.OpCode.{Ok, OpCode}
+import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PerfectLink}
 import se.kth.id2203.networking._
 import se.kth.id2203.overlay._
 import se.sics.kompics.sl._
@@ -37,13 +37,14 @@ import collection.mutable
 import concurrent.{Future, Promise};
 
 case class ConnectTimeout(spt: ScheduleTimeout) extends Timeout(spt);
-case class OpWithPromise(op: OpResponse, promise: Promise[OpResponse] = Promise()) extends KompicsEvent;
+case class OpWithPromise(op: Op, promise: Promise[OpResponse] = Promise()) extends KompicsEvent;
 
 class ClientService extends ComponentDefinition {
 
   //******* Ports ******
   val timer = requires[Timer];
   val net = requires[Network];
+  val pLink = requires[PerfectLink]
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   val server = cfg.getValue[NetAddress]("id2203.project.bootstrap-address");
@@ -65,8 +66,8 @@ class ClientService extends ComponentDefinition {
     }
   }
 
-  net uponEvent {
-    case NetMessage(header, ack @ ConnectAck(id, clusterSize)) => handle {
+  pLink uponEvent {
+    case PL_Deliver(header, ack @ ConnectAck(id, clusterSize)) => handle {
       log.info(s"Client connected to $server, cluster size is $clusterSize");
       if (id != timeoutId.get) {
         log.error("Received wrong response id! System may be inconsistent. Shutting down...");
@@ -77,10 +78,10 @@ class ClientService extends ComponentDefinition {
       val tc = new Thread(c);
       tc.start();
     }
-    case NetMessage(header, or @ OpResponse(id, value, status, answer)) => handle {
+    case PL_Deliver(header, or @ OpResponse(id, status, answer)) => handle {
       log.debug(s"Got OpResponse: $or");
       pending.remove(id.toString) match {
-        case Some(promise) => promise.success(or);
+        case Some(promise) => promise.success(or)
         case None          => log.warn(s"ID $id was not pending! Ignoring response.");
       }
     }
@@ -107,9 +108,10 @@ class ClientService extends ComponentDefinition {
   }
 
   def op(key: String): Future[OpResponse] = {
-    val op = OpResponse();//key, Some(UUID.randomUUID()), Ok)
+    val op = Op(key,UUID.randomUUID(),"GET");//key, Some(UUID.randomUUID()), Ok)
     val owf = OpWithPromise(op);
     trigger(owf -> onSelf);
     owf.promise.future
   }
 }
+

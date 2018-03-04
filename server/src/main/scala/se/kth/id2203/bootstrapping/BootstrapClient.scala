@@ -23,11 +23,12 @@
  */
 package se.kth.id2203.bootstrapping;
 
-import java.util.UUID;
-import se.kth.id2203.networking._;
-import se.sics.kompics.sl._;
-import se.sics.kompics.Start;
-import se.sics.kompics.network.Network;
+import java.util.UUID
+
+import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.id2203.networking._
+import se.sics.kompics.sl._
+import se.sics.kompics.Start
 import se.sics.kompics.timer._;
 
 object BootstrapClient {
@@ -42,7 +43,7 @@ class BootstrapClient extends ComponentDefinition {
   //******* Ports ******
   val bootstrap = provides(Bootstrapping);
   val timer = requires[Timer];
-  val net = requires[Network];
+  val pLink = requires[PerfectLink];
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   val server = cfg.getValue[NetAddress]("id2203.project.bootstrap-address");
@@ -67,27 +68,31 @@ class BootstrapClient extends ComponentDefinition {
     case BSTimeout(_) => handle {
       state match {
         case Waiting => {
-          trigger(NetMessage(self, server, CheckIn) -> net);
+          trigger(PL_Send(server, CheckIn) -> pLink);
         }
         case Started => {
-          trigger(NetMessage(self, server, Ready) -> net);
+          trigger(PL_Send(server, Ready) -> pLink);
           suicide();
         }
       }
     }
   }
 
-  net uponEvent {
-    case NetMessage(header, Boot(assignment)) => handle {
+  pLink uponEvent {
+    case PL_Deliver(header, Boot(assignment)) => handle {
       state match {
         case Waiting => {
           log.info("{} Booting up.", self);
           trigger(Booted(assignment) -> bootstrap);
+          trigger(BLELookUp(assignment) -> bootstrap)
+          trigger(SeqPaxLookUp(assignment) -> bootstrap)
+          trigger(BEBLookUp(assignment) -> bootstrap)
+
           timeoutId match {
             case Some(tid) => trigger(new CancelPeriodicTimeout(tid) -> timer);
             case None      => // nothing to cancel
           }
-          trigger(NetMessage(self, server, Ready) -> net);
+          trigger(PL_Send(server, Ready) -> pLink);
           state = Started;
         }
         case _ => // ignore

@@ -1,51 +1,74 @@
 package se.kth.id2203.components.GLE
 
+import se.kth.id2203.bootstrapping.{BLELookUp, Bootstrapping}
 import se.kth.id2203.components.GLEComponents._
-import se.kth.id2203.{PL_Deliver, PL_Send, PerfectLink}
 import se.kth.id2203.networking.NetAddress
+import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.id2203.overlay.{LookupTable, Routing}
 import se.sics.kompics.network._
 import se.sics.kompics.sl._
-import se.sics.kompics.timer.{ScheduleTimeout, Timeout, Timer}
-import se.sics.kompics.{KompicsEvent, Start}
+import se.sics.kompics.timer.{ScheduleTimeout, Timer}
+
 
 import scala.collection.mutable;
 
 
 
-class GossipLeaderElection(init: Init[GossipLeaderElection]) extends ComponentDefinition {
+class GossipLeaderElection extends ComponentDefinition {
 
   val ble = provides[BallotLeaderElection];
   val pl = requires[PerfectLink];
   val timer = requires[Timer];
 
-  val self = init match {
-    case Init(s: NetAddress) => s
-  }
-  val topology = cfg.getValue[List[NetAddress]]("ble.simulation.topology");
-  val delta = cfg.getValue[Long]("ble.simulation.delay");
-  val majority = (topology.size / 2) + 1;
+  val boot = requires(Bootstrapping)
 
-  private var period = cfg.getValue[Long]("ble.simulation.delay");
-  private var ballots = mutable.Map.empty[NetAddress, Long];
+  val route = requires(Routing)
 
-  private var round = 0l;
-  private var ballot = ballotFromNAddress(0, self);
+  val self = cfg.getValue[NetAddress]("id2203.project.address");
 
-  private var leader: Option[(Long, Address)] = None;
-  private var highestBallot: Long = ballot;
+  var topology : List[NetAddress] = List.empty
+  var delta : Long = 0l
+  var majority = (topology.size / 2) + 1
+
+  private var period : Long = 0l
+  private var ballots = mutable.Map.empty[NetAddress, Long]
+
+  private var round = 0l
+  private var ballot = ballotFromNAddress(0, self)
+
+  private var leader: Option[(Long, Address)] = None
+  private var highestBallot: Long = ballot
 
   private var topProcess : NetAddress = self
   private var topBallot : Long = 0l
   private var top = (self -> 0l)
+  private val ballotOne = 0x0100000000l;
 
   private def startTimer(delay: Long): Unit = {
-    val scheduledTimeout = new ScheduleTimeout(period);
-    scheduledTimeout.setTimeoutEvent(CheckTimeout(scheduledTimeout));
-    trigger(scheduledTimeout -> timer);
+    val scheduledTimeout = new ScheduleTimeout(period)
+    scheduledTimeout.setTimeoutEvent(CheckTimeout(scheduledTimeout))
+    trigger(scheduledTimeout -> timer)
   }
 
+  def ballotFromNAddress(n: Int, adr: NetAddress): Long = {
+    val nBytes = com.google.common.primitives.Ints.toByteArray(n);
+    val addrBytes = com.google.common.primitives.Ints.toByteArray(adr.hashCode());
+    val bytes = nBytes ++ addrBytes;
+    val r = com.google.common.primitives.Longs.fromByteArray(bytes);
+    assert(r > 0); // should not produce negative numbers!
+    r
+  }
+
+  def incrementBallotBy(ballot: Long, inc: Int): Long = {
+    ballot + inc.toLong * ballotOne
+  }
+
+  def incrementBallot(ballot: Long): Long = {
+    ballot + ballotOne
+  }
   private def findtop()
   {
+    //TODO CHANGES SCHEME
     topProcess = self
     topBallot = 0l
     top = (self -> 0l)
@@ -79,8 +102,13 @@ class GossipLeaderElection(init: Init[GossipLeaderElection]) extends ComponentDe
 
   }
 
-  ctrl uponEvent {
-    case _: Start => handle {
+  boot uponEvent {
+    case BLELookUp(table: LookupTable) => handle {
+
+      for( p <- table.partitions.keySet; if table.partitions.contains(p))
+        {
+          topology ++= table.partitions(p)
+        }
       startTimer(period);
     }
   }

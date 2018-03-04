@@ -32,6 +32,7 @@ import se.sics.kompics.network.netty._
 import se.sics.kompics.timer.Timer
 import se.sics.kompics.timer.java.JavaTimer
 import se.kth.id2203.PerfectP2PLink
+import se.kth.id2203.networking.PerfectLinkComponents.PerfectLink
 class ParentComponent extends ComponentDefinition {
 
   val self = cfg.getValue[NetAddress]("id2203.project.address");
@@ -42,7 +43,8 @@ class ParentComponent extends ComponentDefinition {
   val pLink = create(classOf[PerfectP2PLink], Init.NONE);
 
   connect[Timer](timer -> client);
-  connect[Network](net -> client);
+  connect[Network](net -> pLink);
+  connect[PerfectLink](pLink -> client)
 
 }
 

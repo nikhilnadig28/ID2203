@@ -61,9 +61,9 @@ trait Operation extends KompicsEvent {
   def id: UUID;
   def key : String;
   def requestType: String;
-  def value : String = "NULL";
-  def refVal : String = "NULL";
-  def newVal : String = "NULL";
+  def value : Option[String]
+  def refVal : Option[String]
+  def newVal : Option[String]
 
 }
 trait OperationResponse extends KompicsEvent {
@@ -74,26 +74,10 @@ trait OperationResponse extends KompicsEvent {
 }
 
 @SerialVersionUID(0xfacc6612da2139eaL)
-case class Op(key: String, id: UUID = UUID.randomUUID(), requestType : String , override var value : String = "NULL",
-              override var refVal : String = "NULL", override var newVal : String = "NULL") extends Operation with Serializable {
+case class Op(key: String, id: UUID = UUID.randomUUID(), requestType : String ,   value : Option[String] = None ,
+                refVal : Option[String] = None,  newVal : Option[String] = None) extends Operation with Serializable {
   def response(status: OpCode.OpCode, response : String ): OpResponse = OpResponse(id, status, response);
 }
 
 @SerialVersionUID(0x0227a2aea45e5e75L)
 case class OpResponse(id: UUID, status: OpCode.OpCode, response : String) extends OperationResponse with Serializable;
-
-//@SerialVersionUID(0x0227a2aea45e5e75L)
-//case class OpResponse(id: UUID, key: Option[String], status: OpCode.OpCode, operation: Operation) extends OperationResponse with Serializable;
-//
-//case class Connect(id: String) extends KompicsEvent
-//
-//case class Ack(id: String, clusterSize: Int) extends KompicsEvent
-//
-//case class Get(key: String, id: String, clientAddress: NetAddress) extends Operation
-//
-//case class Put(key: String, value: String, id: String, clientAddress: NetAddress) extends Operation
-//
-//case class CAS(key: String, oldVal: String, newVal: String, id: String, clientAddress: NetAddress) extends Operation
-//
-//case class GenericOp(id: NetAddress, operation: Operation) extends KompicsEvent
-//

@@ -1,41 +1,69 @@
 package se.kth.id2203.components.SeqCons
 
-import se.kth.id2203.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.id2203.bootstrapping.{BLELookUp, Bootstrapping}
 import se.kth.id2203.components.GLEComponents.{BLE_Leader, BallotLeaderElection}
+import se.kth.id2203.components.NetworkComponents.BestEffortBroadcast
 import se.kth.id2203.networking.NetAddress
 import se.sics.kompics.sl._
 import se.kth.id2203.components.SeqCons.PaxosComponents.Role._
 import se.kth.id2203.components.SeqCons.PaxosComponents.State._
 import se.kth.id2203.components.SeqCons.PaxosComponents._
+import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.id2203.overlay.{LookupTable, Routing}
+import se.sics.kompics.timer.Timer
+
 import scala.collection.mutable
 
-class SequencePaxos(init: Init[SequencePaxos]) extends ComponentDefinition {
+class SequencePaxos extends ComponentDefinition {
 
 
 
   val sc = provides[SequenceConsensus];
   val ble = requires[BallotLeaderElection];
   val pl = requires[PerfectLink];
+  val boot = requires(Bootstrapping)
+  val beb = requires[BestEffortBroadcast]
+  val timer = requires[Timer]
+  val route = requires(Routing)
 
-  val (self, pi, others) = init match {
-    case Init(addr: NetAddress, pi: Set[NetAddress] @unchecked) => (addr, pi, pi - addr)
-  }
-  val majority = (pi.size / 2) + 1;
+  ////
+//  var (self, pi, others) = init match {
+//    case Init(addr: NetAddress, pi: Set[NetAddress] @unchecked) => (addr, pi, pi - addr)
+//  }
+//
+val self = cfg.getValue[NetAddress]("id2203.project.address")
+  var pi : Set[NetAddress] @unchecked = Set.empty
+  var others : Set[NetAddress] @unchecked = Set.empty
+
+  var majority = (pi.size / 2) + 1;
 
   var state = (FOLLOWER, UNKNOWN);
   var nL = 0l;
   var nProm = 0l;
   var leader: Option[NetAddress] = None;
   var na = 0l;
-  var va = List.empty[RSM_Command];
+  var va = List.empty[RSM];
   var ld = 0;
   // leader state
-  var propCmds = List.empty[RSM_Command];
+  var propCmds = List.empty[RSM];
   val las = mutable.Map.empty[NetAddress, Int];
   val lds = mutable.Map.empty[NetAddress, Int];
   var lc = 0;
-  val acks = mutable.Map.empty[NetAddress, (Long, List[RSM_Command])];
+  var acks = mutable.Map.empty[NetAddress, (Long, List[RSM])];
 
+
+  boot uponEvent {
+
+    case BLELookUp(table: LookupTable) => handle {
+
+      for( p <- table.partitions.keySet; if table.partitions.contains(p))
+      {
+        pi ++= table.partitions(p)
+      }
+      majority = (pi.size / 2) + 1
+
+    }
+  }
 
   ble uponEvent {
     case BLE_Leader(l, n) => handle {
@@ -45,7 +73,7 @@ class SequencePaxos(init: Init[SequencePaxos]) extends ComponentDefinition {
         nL = n;
         if(self == l && nL > nProm) {
           state = (LEADER, PREPARE);
-          propCmds = List.empty[RSM_Command];
+          propCmds = List.empty[RSM];
           las.clear();
           for( p<-pi)
           {
@@ -78,13 +106,13 @@ class SequencePaxos(init: Init[SequencePaxos]) extends ComponentDefinition {
       if(nProm < np){
         nProm = np;
         state = (FOLLOWER,PREPARE);
-        var sfx = List.empty[RSM_Command];
+        var sfx = List.empty[RSM];
         if(na >= n){
           sfx = suffix(va,ldp);
         }
         else
         {
-          sfx = List.empty[RSM_Command];
+          sfx = List.empty[RSM];
         }
         trigger(PL_Send(p, Promise(np, na, sfx, ld)) -> pl);
       }

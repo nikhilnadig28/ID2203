@@ -68,7 +68,7 @@ object LookupTable {
     var l : Int = 0
 
 
-    while(!tempnodes.isEmpty)
+    while(tempnodes.nonEmpty)
     {
       val temp : Set[NetAddress] = tempnodes.take(3)
       tempnodes = tempnodes -- temp

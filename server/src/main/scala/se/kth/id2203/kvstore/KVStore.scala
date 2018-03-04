@@ -23,11 +23,15 @@
  */
 package se.kth.id2203.kvstore;
 
+
 import se.kth.id2203.bootstrapping.Bootstrapping
-import se.kth.id2203.components.NetworkComponents.CRB_Broadcast
+import se.kth.id2203.components.GLEComponents.BallotLeaderElection
 import se.kth.id2203.components.NetworkComponents._
+import se.kth.id2203.components.SeqCons.PaxosComponents.{RSM, SC_Decide, SequenceConsensus}
 import se.kth.id2203.kvstore.OpCode.{Failure, NotFound, Ok}
-import se.kth.id2203.networking.{NetAddress, NetMessage}
+import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.id2203.networking._
+import se.kth.id2203.overlay.Routing
 import se.sics.kompics.sl._
 
 import scala.collection.mutable
@@ -37,15 +41,16 @@ class KVStore extends ComponentDefinition {
 
   //******* Ports ******
   val pLink = requires[PerfectLink]
-  //  val route = requires[Routing]
+    val route = requires(Routing)
   val beb = requires[BestEffortBroadcast]
   val boot = requires(Bootstrapping)
 
-
+  val seqCons = requires[SequenceConsensus]
+  val ble = requires[BallotLeaderElection]
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
 
-  val data: mutable.HashMap[String, String] = mutable.HashMap()
+  var data: mutable.HashMap[String, String] = mutable.HashMap()
 
   //******* Handlers ******
   //  route uponEvent {
@@ -71,7 +76,7 @@ class KVStore extends ComponentDefinition {
     case PL_Deliver(leader, operation : Op) if operation.requestType == "put"  => handle {
 
     // PUT operation.
-    data(operation.key) = operation.value
+    data(operation.key) = operation.value.fold("")(_.toString())
       trigger(PL_Send(leader, operation.response(Ok, "Value Inserted")) -> pLink)
   }
 
@@ -88,7 +93,7 @@ class KVStore extends ComponentDefinition {
       //else, throw error!
       if(data(key).equals(oldVal))
       {
-        data(key) = newVal
+        data(key) = newVal.fold("")(_.toString())
         //Trigger success
         trigger(PL_Send(leader, operation.response(Ok, newVal.toString())) -> pLink)
       }
@@ -105,5 +110,48 @@ class KVStore extends ComponentDefinition {
         trigger(PL_Send(leader, operation.response(NotFound, "key : value not found")) -> pLink)
       }
   }
+  }
+
+  seqCons uponEvent {
+
+    case SC_Decide(RSM(id, src, op)) => handle {
+
+      if(op.requestType == "GET")
+        {
+          if(data.exists(_._1 == op.key.toInt))
+            {
+              val value = data.get(op.key)
+              trigger(PL_Send(src, op.response(OpCode.Ok, "GET : "+value.toString)) -> pLink);
+            }
+          else
+            {
+              val value = "GET : No value for key: "+op.key
+              trigger((PL_Send(src, op.response(OpCode.NotFound, value.toString)))-> pLink)
+            }
+        }
+      else if(op.requestType == "PUT")
+        {
+          data(op.key) = op.value.fold("")(_.toString())
+          trigger(PL_Send(src, op.response(OpCode.Ok, "PUT : Success "+op.key+":"+op.value)) -> pLink);
+        }
+      else if(op.requestType == "CAS")
+        {
+          val refVal = op.refVal
+          val newVal = op.newVal
+          if(data(op.key) == refVal)
+          {
+            data(op.key) = newVal.fold("")(_.toString())
+            trigger(PL_Send(src, op.response(OpCode.Ok,"CAS : Success "+op.key+": oldVal-"+op.refVal+" newVal-"+op.newVal)) -> pLink)
+          }
+          else
+          {
+            trigger(PL_Send(src, op.response(OpCode.Failure,"CAS : Failure "+op.key+": oldVal-"+op.refVal+" newVal-"+op.newVal)) -> pLink)
+          }
+        }
+      else
+      {
+        trigger(PL_Send(src, op.response(OpCode.NotImplemented,"Error : "+op.requestType+" NOT A VALID OPERATION")) -> pLink);
+      }
+    }
   }
 }

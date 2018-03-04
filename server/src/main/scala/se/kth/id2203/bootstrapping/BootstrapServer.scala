@@ -23,12 +23,13 @@
  */
 package se.kth.id2203.bootstrapping;
 
-import java.util.UUID;
-import se.kth.id2203.networking._;
-import se.sics.kompics.sl._;
-import se.sics.kompics.Start;
-import se.sics.kompics.network.Network;
-import se.sics.kompics.timer._;
+import java.util.UUID
+
+import se.kth.id2203.networking.NetAddress
+import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
+import se.sics.kompics.sl._
+import se.sics.kompics.Start
+import se.sics.kompics.timer._
 import collection.mutable;
 
 object BootstrapServer {
@@ -44,7 +45,7 @@ class BootstrapServer extends ComponentDefinition {
 
   //******* Ports ******
   val boot = provides(Bootstrapping);
-  val net = requires[Network];
+  val pLink = requires[PerfectLink];
   val timer = requires[Timer];
 
   //******* Fields ******
@@ -52,8 +53,8 @@ class BootstrapServer extends ComponentDefinition {
   val bootThreshold = cfg.getValue[Int]("id2203.project.bootThreshold");
   private var state: State = Collecting;
   private var timeoutId: Option[UUID] = None;
-  private val active = mutable.HashSet.empty[NetAddress];
-  private val ready = mutable.HashSet.empty[NetAddress];
+  private var active = mutable.HashSet.empty[NetAddress];
+  private var ready = mutable.HashSet.empty[NetAddress];
   private var initialAssignment: Option[NodeAssignment] = None;
   //******* Handlers ******
   ctrl uponEvent {
@@ -83,7 +84,6 @@ class BootstrapServer extends ComponentDefinition {
             log.info("Finished seeding. Bootstrapping complete.");
             initialAssignment match {
               case Some(assignment) => {
-                trigger(Booted(assignment) -> boot);
                 state = Done;
               }
               case None => {
@@ -104,19 +104,24 @@ class BootstrapServer extends ComponentDefinition {
     case InitialAssignments(assignment) => handle {
       initialAssignment = Some(assignment);
       log.info("Seeding assignments...");
-      active foreach { node =>
-        trigger(NetMessage(self, node, Boot(assignment)) -> net);
+      active foreach { node: NetAddress =>
+        trigger(PL_Send(node, Boot(assignment)) -> pLink);
       }
+      trigger(Booted(assignment) -> boot);
+      trigger(BEBLookUp(assignment) -> boot);
+      trigger(BLELookUp(assignment) -> boot);
+      trigger(SeqPaxLookUp(assignment) -> boot);
+
       ready += self;
     }
   }
 
-  net uponEvent {
-    case NetMessage(header, CheckIn) => handle {
-      active += header.src;
+  pLink uponEvent {
+    case PL_Deliver(header, CheckIn) => handle {
+      active = active + header;
     }
-    case NetMessage(header, Ready) => handle {
-      ready += header.src;
+    case PL_Deliver(header, Ready) => handle {
+      ready = ready + header;
     }
   }
 
