@@ -25,32 +25,33 @@ package se.kth.id2203.kvstore;
 
 import java.util.UUID
 
-import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PerfectLink}
+import se.kth.{PL_Deliver, PL_Send, PerfectLink}
+
 import se.kth.id2203.networking._
 import se.kth.id2203.overlay._
 import se.sics.kompics.sl._
 import se.sics.kompics.{Kompics, KompicsEvent, Start}
 import se.sics.kompics.network.Network
 import se.sics.kompics.timer._
+import se.sics.kompics.network.Address
 
 import collection.mutable
 import concurrent.{Future, Promise};
 
 case class ConnectTimeout(spt: ScheduleTimeout) extends Timeout(spt);
-case class OpWithPromise(op: Op, promise: Promise[OpResponse] = Promise()) extends KompicsEvent;
+case class OpWithPromise(op: Operation, promise: Promise[OpResponse] = Promise()) extends KompicsEvent;
 
 class ClientService extends ComponentDefinition {
 
   //******* Ports ******
   val timer = requires[Timer];
   val net = requires[Network];
-  val pLink = requires[PerfectLink]
   //******* Fields ******
-  val self = cfg.getValue[NetAddress]("id2203.project.address");
-  val server = cfg.getValue[NetAddress]("id2203.project.bootstrap-address");
+  val self = cfg.getValue[NetAddress]("id2203.project.address"); //Changed: to work with homework
+  val server = cfg.getValue[NetAddress]("id2203.project.bootstrap-address"); //Changed to work with homework
   private var connected: Option[ConnectAck] = None;
   private var timeoutId: Option[UUID] = None;
-  private val pending = mutable.SortedMap.empty[String, Promise[OpResponse]];
+  private val pending = mutable.SortedMap.empty[UUID, Promise[OpResponse]];
 
   //******* Handlers ******
   ctrl uponEvent {
@@ -66,8 +67,8 @@ class ClientService extends ComponentDefinition {
     }
   }
 
-  pLink uponEvent {
-    case PL_Deliver(header, ack @ ConnectAck(id, clusterSize)) => handle {
+  net uponEvent {
+    case NetMessage(header, ack @ ConnectAck(id, clusterSize)) => handle { //Changed to deliver
       log.info(s"Client connected to $server, cluster size is $clusterSize");
       if (id != timeoutId.get) {
         log.error("Received wrong response id! System may be inconsistent. Shutting down...");
@@ -78,10 +79,10 @@ class ClientService extends ComponentDefinition {
       val tc = new Thread(c);
       tc.start();
     }
-    case PL_Deliver(header, or @ OpResponse(id, status, answer)) => handle {
+    case  NetMessage(header, or @ OpResponse(id, status, answer)) => handle { //Changed to deliver
       log.debug(s"Got OpResponse: $or");
-      pending.remove(id.toString) match {
-        case Some(promise) => promise.success(or)
+      pending.remove(id) match {
+        case Some(promise) => promise.success(or);
         case None          => log.warn(s"ID $id was not pending! Ignoring response.");
       }
     }
@@ -99,19 +100,32 @@ class ClientService extends ComponentDefinition {
     }
   }
 
+
+  //divide to two parts
   loopbck uponEvent {
     case OpWithPromise(op, promise) => handle {
-      val rm = RouteMsg(op.id.toString, op); // don't know which partition is responsible, so ask the bootstrap server to forward it
-      trigger(NetMessage(self, server, rm) -> net);
-      pending += (op.id.toString -> promise);
+      val rm = RouteMsg(op.key, op); // don't know which partition is responsible, so ask the bootstrap server to forward it
+      trigger(NetMessage(self, server, rm) -> net); //Changed
+      pending += (op.id -> promise);
     }
   }
 
-  def op(key: String): Future[OpResponse] = {
-    val op = Op(key,UUID.randomUUID(),"GET");//key, Some(UUID.randomUUID()), Ok)
+
+//  def preLoad(): Future[OpResponse] = {
+//
+//    val op = Op("100", UUID.randomUUID(), "PUT", Option("10"))
+//
+//    println("ID "+op.id+" Key "+op.key+" Value "+op.value+" : "+op.requestType);
+//    val owf = OpWithPromise(op);
+//    trigger(owf -> onSelf);
+//    owf.promise.future
+//  }
+
+  def op(cmd: String, key: String, value: Option[String] = None, newValue: Option[String] = None): Future[OpResponse] = {
+
+    val op = Op(key, UUID.randomUUID(), cmd, value, newValue)
     val owf = OpWithPromise(op);
     trigger(owf -> onSelf);
     owf.promise.future
   }
 }
-

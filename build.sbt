@@ -1,3 +1,4 @@
+
 name := "project18"
 organization in ThisBuild := "se.kth.id2203"
 version in ThisBuild := "1.0-SNAPSHOT"

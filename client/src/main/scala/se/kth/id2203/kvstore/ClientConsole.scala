@@ -31,26 +31,65 @@ import fastparse.all._
 import concurrent.Await
 import concurrent.duration._
 
+
 object ClientConsole {
   // Better build this statically. Has some overhead (building a lookup table).
-  val simpleStr = P(CharsWhileIn(('0' to '9') ++ ('a' to 'z') ++ ('A' to 'Z'), 1).!);
+  val simpleStr = P(CharsWhileIn(('0' to '9') ++ ('a' to 'z') ++ ('A' to 'Z') ++ (' ' to ' '), 1).!);
   val colouredLayout = new ColoredPatternLayout("%d{[HH:mm:ss,SSS]} %-5p {%c{1}} %m%n");
 }
-
 class ClientConsole(val service: ClientService) extends CommandConsole with ParsedCommands with StrictLogging {
   import ClientConsole._;
 
   override def layout: Layout = colouredLayout;
   override def onInterrupt(): Unit = exit();
 
-  val opCommand = parsed(P("op" ~ " " ~ simpleStr), usage = "op <key>", descr = "Executes an op for <key>.") { key =>
-    println(s"Op with $key");
+  val opCommand = parsed(P("op " ~ simpleStr), usage = "<key>", descr = "Executes an op for <key>.")
+  { key =>
+    //println(s"Op with $key");
 
-    val fr = service.op(key);
+    val ip : Array[String] = key.split(" ")
+    //println(s"Op with op: $ip");
+
+    val cmd : String  = ip.head
+    println(s"$cmd");
+
+    var k : String = "";
+    var value : String = "";
+    var newVal : String = "";
+
+    ///TODO Handle improper number of commands
+      if(cmd.toUpperCase == "GET" ){
+      k = ip(1)
+      println(s"Op with key: $k");
+    }
+    else if(cmd.toUpperCase == "PUT"){
+      k = ip(1)
+      println(s"Op with key: $k");
+
+      value  = ip(2).toString
+      println(s"Op with value: $value");
+    }
+
+    else if( cmd.toUpperCase == "CAS"){
+      k = ip(1)
+      println(s"Op with key: $k");
+
+      value = ip(2).toString
+      println(s"Op with value: $value");
+        newVal = ip(3).toString
+        println(s"Op with newVal : $newVal")
+    }
+
+
+   val fr = service.op(cmd, k, Some(value), Some(newVal));
+
     out.println("Operation sent! Awaiting response...");
     try {
       val r = Await.result(fr, 5.seconds);
       out.println("Operation complete! Response was: " + r.status);
+      if(cmd == "GET"){
+        out.println("Value: "+r.response)
+      }
     } catch {
       case e: Throwable => logger.error("Error during op.", e);
     }

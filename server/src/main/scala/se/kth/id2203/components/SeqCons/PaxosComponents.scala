@@ -1,14 +1,15 @@
 package se.kth.id2203.components.SeqCons
+
 import java.util.UUID
 
 import se.kth.id2203.kvstore.Op
 import se.kth.id2203.networking.NetAddress
-import se.sics.kompics.sl._
 import se.sics.kompics.KompicsEvent
+import se.sics.kompics.sl._
 
 object PaxosComponents {
 
-  class SequenceConsensus extends Port {
+  object SequenceConsensus extends Port {
     request[SC_Propose];
     indication[SC_Decide];
   }

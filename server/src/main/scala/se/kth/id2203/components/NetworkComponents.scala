@@ -1,9 +1,9 @@
 package se.kth.id2203.components
 
-
+import se.kth.id2203.networking.NetAddress
 import se.sics.kompics.KompicsEvent
 import se.sics.kompics.sl._
-import se.kth.id2203.networking.{NetAddress, NetMessage}
+import se.sics.kompics.timer.{ScheduleTimeout, Timeout}
 
 object NetworkComponents {
 
@@ -12,55 +12,47 @@ object NetworkComponents {
 
   case class BEB_Broadcast(payload: KompicsEvent) extends KompicsEvent
 
-  class BestEffortBroadcast extends Port {
+  object BestEffortBroadcast extends Port {
     indication[BEB_Deliver]
     request[BEB_Broadcast]
   }
 
-  case class RB_Deliver(src: NetAddress, payload: KompicsEvent) extends KompicsEvent
 
-  case class RB_Broadcast(payload: KompicsEvent) extends KompicsEvent
-
-  case class DataMessage(timestamp: VectorClock, payload: KompicsEvent) extends KompicsEvent
-
-
-  class ReliableBroadcast extends Port {
-    indication[RB_Deliver]
-    request[RB_Broadcast]
-  }
-  case class OriginatedData(src: NetAddress, payload: KompicsEvent) extends KompicsEvent;
-
-  case class CRB_Deliver(src: NetAddress, payload: KompicsEvent) extends KompicsEvent
-
-  case class CRB_Broadcast(payload: KompicsEvent) extends KompicsEvent
-
-  class CausalOrderReliableBroadcast extends Port {
-    indication[CRB_Deliver]
-    request[CRB_Broadcast]
+  object BallotLeaderElection extends Port {
+    indication[BLE_Leader]
   }
 
-  case class VectorClock(var vc: Map[NetAddress, Int]) {
+  case class BLE_Leader(leader: NetAddress, ballot: Long) extends KompicsEvent;
 
-    def inc(addr: NetAddress) = {
-      vc = vc + ((addr, vc.get(addr).get + 1))
-    }
+  case class CheckTimeout(timeout: ScheduleTimeout) extends Timeout(timeout);
 
-    def set(addr: NetAddress, value: Int) = {
-      vc = vc + ((addr, value))
-    }
+  case class HeartbeatReq(round: Long, highestBallot: Long) extends KompicsEvent;
 
-    def <=(that: VectorClock): Boolean = vc.foldLeft[Boolean](true)((leq, entry) => leq & (entry._2 <= that.vc.getOrElse(entry._1, entry._2)))
+  case class HeartbeatResp(round: Long, ballot: Long) extends KompicsEvent;
 
-  }
-  object VectorClock {
 
-    def empty(topology: scala.Seq[NetAddress]): VectorClock = {
-      VectorClock(topology.foldLeft[Map[NetAddress, Int]](Map[NetAddress, Int]())((mp, addr) => mp + ((addr, 0))))
-    }
-
-    def apply(that: VectorClock): VectorClock = {
-      VectorClock(that.vc)
-    }
-
-  }
+//  case class VectorClock(var vc: Map[NetAddress, Int]) {
+//
+//    def inc(addr: NetAddress) = {
+//      vc = vc + ((addr, vc.get(addr).get + 1))
+//    }
+//
+//    def set(addr: NetAddress, value: Int) = {
+//      vc = vc + ((addr, value))
+//    }
+//
+//    def <=(that: VectorClock): Boolean = vc.foldLeft[Boolean](true)((leq, entry) => leq & (entry._2 <= that.vc.getOrElse(entry._1, entry._2)))
+//
+//  }
+//  object VectorClock {
+//
+//    def empty(topology: scala.Seq[NetAddress]): VectorClock = {
+//      VectorClock(topology.foldLeft[Map[NetAddress, Int]](Map[NetAddress, Int]())((mp, addr) => mp + ((addr, 0))))
+//    }
+//
+//    def apply(that: VectorClock): VectorClock = {
+//      VectorClock(that.vc)
+//    }
+//
+//  }
 }

@@ -25,10 +25,11 @@ package se.kth.id2203.bootstrapping;
 
 import java.util.UUID
 
-import se.kth.id2203.networking.NetAddress
-import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.id2203.networking._
 import se.sics.kompics.sl._
 import se.sics.kompics.Start
+import se.sics.kompics.network.Network
 import se.sics.kompics.timer._
 import collection.mutable;
 
@@ -39,22 +40,22 @@ object BootstrapServer {
   case object Done extends State;
 
 }
-
+///TODO Remodelling
 class BootstrapServer extends ComponentDefinition {
   import BootstrapServer._;
 
   //******* Ports ******
   val boot = provides(Bootstrapping);
-  val pLink = requires[PerfectLink];
+  val net = requires[Network];
   val timer = requires[Timer];
-
+  val pLink = requires(PerfectLink);
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   val bootThreshold = cfg.getValue[Int]("id2203.project.bootThreshold");
   private var state: State = Collecting;
   private var timeoutId: Option[UUID] = None;
-  private var active = mutable.HashSet.empty[NetAddress];
-  private var ready = mutable.HashSet.empty[NetAddress];
+  private val active = mutable.HashSet.empty[NetAddress]; //Type changed
+  private val ready = mutable.HashSet.empty[NetAddress]; //Type changed
   private var initialAssignment: Option[NodeAssignment] = None;
   //******* Handlers ******
   ctrl uponEvent {
@@ -84,6 +85,8 @@ class BootstrapServer extends ComponentDefinition {
             log.info("Finished seeding. Bootstrapping complete.");
             initialAssignment match {
               case Some(assignment) => {
+
+
                 state = Done;
               }
               case None => {
@@ -104,13 +107,14 @@ class BootstrapServer extends ComponentDefinition {
     case InitialAssignments(assignment) => handle {
       initialAssignment = Some(assignment);
       log.info("Seeding assignments...");
-      active foreach { node: NetAddress =>
+      active foreach { node =>
         trigger(PL_Send(node, Boot(assignment)) -> pLink);
       }
       trigger(Booted(assignment) -> boot);
-      trigger(BEBLookUp(assignment) -> boot);
-      trigger(BLELookUp(assignment) -> boot);
-      trigger(SeqPaxLookUp(assignment) -> boot);
+      trigger(BootKV(assignment) -> boot);
+      trigger(BEBLookUp(assignment) -> boot)
+      trigger(BLELookUp(assignment) -> boot)
+      trigger(SeqPaxLookUp(assignment) -> boot)
 
       ready += self;
     }
@@ -118,10 +122,10 @@ class BootstrapServer extends ComponentDefinition {
 
   pLink uponEvent {
     case PL_Deliver(header, CheckIn) => handle {
-      active = active + header;
+      active += header
     }
     case PL_Deliver(header, Ready) => handle {
-      ready = ready + header;
+      ready += header
     }
   }
 
@@ -135,6 +139,6 @@ class BootstrapServer extends ComponentDefinition {
   private def bootUp(): Unit = {
     log.info("Threshold reached. Generating assignments...");
     state = Seeding;
-    trigger(GetInitialAssignments(active.toSet) -> boot);
+    trigger(GetInitialAssignments(active.toSet) -> boot); //The type of get intial assignment has changed
   }
 }

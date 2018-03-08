@@ -23,17 +23,16 @@
  */
 package se.kth.id2203;
 
-
+import se.kth.PerfectLink
 import se.kth.id2203.bootstrapping._
-import se.kth.id2203.components.Broadcast.BEB.BEB
-import se.kth.id2203.components.SeqCons.PaxosComponents.SequenceConsensus
+import se.kth.id2203.broadcast.PerfectP2PLink
+import se.kth.id2203.components.Broadcast.{BEB}
 import se.kth.id2203.components.GLE.GossipLeaderElection
-import se.kth.id2203.components.GLEComponents.BallotLeaderElection
-import se.kth.id2203.components.NetworkComponents.BestEffortBroadcast
+import se.kth.id2203.components.NetworkComponents.{BallotLeaderElection, BestEffortBroadcast}
+import se.kth.id2203.components.SeqCons.PaxosComponents.SequenceConsensus
 import se.kth.id2203.components.SeqCons.SequencePaxos
 import se.kth.id2203.kvstore.KVStore
 import se.kth.id2203.networking.NetAddress
-import se.kth.id2203.networking.PerfectLinkComponents.PerfectLink
 import se.kth.id2203.overlay._
 import se.sics.kompics.sl._
 import se.sics.kompics.Init
@@ -41,107 +40,115 @@ import se.sics.kompics.network.Network
 import se.sics.kompics.timer.Timer;
 
 class ParentComponent extends ComponentDefinition {
-//TODO
+
   //******* Ports ******
   val net = requires[Network];
   val timer = requires[Timer];
   //******* Children ******
-//  val epfd = create(classOf[EPFD], Init.NONE)
-//  val eld = create(classOf[ELD], Init.NONE)
-  val pLink = create(classOf[PerfectP2PLink], Init.NONE)
-  val beb = create(classOf[BEB], Init.NONE)
-
-
   val overlay = create(classOf[VSOverlayManager], Init.NONE);
   val kv = create(classOf[KVStore], Init.NONE);
- val seqCons = create(classOf[SequencePaxos], Init.NONE)
+  val plink = create(classOf[PerfectP2PLink], Init.NONE); //Create an instance of the perfect link
+  val beb = create(classOf[BEB], Init.NONE);
+  val seqpax = create(classOf[SequencePaxos], Init.NONE)
   val gle = create(classOf[GossipLeaderElection], Init.NONE)
-
   val boot = cfg.readValue[NetAddress]("id2203.project.bootstrap-address") match {
     case Some(_) => create(classOf[BootstrapClient], Init.NONE); // start in client mode
-    case None  => create(classOf[BootstrapServer], Init.NONE); // start in server mode
+    case None    => create(classOf[BootstrapServer], Init.NONE); // start in server mode
   }
 
-
-  connect[Network](net -> pLink)
-
-  connect[PerfectLink](pLink -> beb)
-
-  connect(Bootstrapping)(boot -> beb)
-
-  connect[Timer](timer -> boot)
-
-  connect[PerfectLink](pLink -> boot)
-
-  connect(Bootstrapping)(boot -> overlay)
-
-  connect[PerfectLink](pLink -> overlay);
-
-  connect[BestEffortBroadcast](beb -> overlay);
-
-  connect[BallotLeaderElection](gle -> overlay);
-
-  connect(Bootstrapping)(boot -> gle);
-
-  connect[PerfectLink](pLink -> gle);
-
-  connect[Timer](timer -> gle);
-
-  connect(Bootstrapping)(boot -> kv)
-
-  connect(Routing)(overlay -> kv)
-
-  connect[PerfectLink](pLink -> kv);
-
-  connect[BestEffortBroadcast](beb -> kv)
-
-  connect[SequenceConsensus](seqCons -> kv)
-
-  connect[PerfectLink](pLink -> seqCons)
-
-  connect[BestEffortBroadcast](beb -> seqCons)
-
-  connect(Bootstrapping)(boot -> seqCons)
-
-  connect[BallotLeaderElection](gle -> seqCons);
-
-  connect[Timer](timer -> seqCons);
-
-  //connect(Routing)(overlay -> gle)
-
-//  //  if (boot.equals("server")) {
+  {
 //
-//    // KV Store
-//    connect[Network](net -> kv)
+//    //Doing connections between ports
 //
-//    //BEB
-//    connect[Timer](timer -> beb)
-//    connect[Network](net -> beb)
-////    connect[EventuallyPerfectFailureDetector](epfd -> beb)
+//    //Since plink exists, connect network to plink
+//    connect[Network] (net -> plink);
+//
+//    //Connecting Plink to : overlay, bootstrap, kv, beb
+//
+//    connect(PerfectLink) (plink -> overlay);
+//    connect(PerfectLink) (plink -> kv);
+//    connect(PerfectLink) (plink -> boot);
+//    connect(PerfectLink)  (plink -> beb);
+//
+//    //Connecting Bootstrap to : overlay, beb
+//
+//    connect(Bootstrapping) (boot -> beb);
+//    connect(Bootstrapping)(boot -> overlay);
 //
 //
-////  }
+//    //Connecting beb to overlay, kv
 //
-//  // Bootstrap
-//  connect[Network](net -> boot)
-//  connect[PerfectLink](pLink -> beb)
+//    connect(BestEffortBroadcast) (beb -> overlay);
+//    connect(BestEffortBroadcast) (beb -> kv);
 //
+//    //connecting overlay to: kv
 //
-//  // Overlay
-//  connect(Bootstrapping)(boot -> beb)
-//  connect[Network](net -> overlay)
-////  connect[EventuallyPerfectFailureDetector](epfd -> overlay)
+//    connect(Routing)(overlay -> kv);
 //
 //
-//  // Failure detector
-////  connect(Routing)(overlay -> epfd)
-////  connect[Network](net -> epfd)
-////  connect[Timer](timer -> epfd)
+//    //Connecting Timer to : bootstrap
 //
-//  // Sequential Paxos
-//  connect[PerfectLink](pLink -> seqCons);
+//    connect[Timer](timer -> boot);
 //
-//  connect(Bootstrapping)(boot -> seqCons);
 //
+//    // Connecting leader to beb
+//
+//
+////To sequencial paxos
+//    connect(PerfectLink)(plink -> seqpax);
+//    connect(BestEffortBroadcast)(beb -> seqpax);
+//    connect(Bootstrapping)(boot -> seqpax);
+//    connect(BallotLeaderElection)(gle -> seqpax);
+//    //Connecting epfd to ..
+//
+//
+//    //To leadre ellection
+//
+//
+//    connect(Bootstrapping)(boot -> gle);
+//    connect(PerfectLink)(plink -> gle);
+//    connect[Timer](timer -> gle);
+//
+//
+//    //Tokv
+//
+//
+//    connect(Bootstrapping)(boot -> kv);
+//    connect[SequenceConsensus](seqpax -> kv);
+//
+//    connect[BestEffortBroadcast](beb -> overlay);
+//    connect[BallotLeaderElection](gle -> overlay);
 
+
+    //PerfectLink
+    connect[Network](net -> plink);
+    //BestEffortBroadcast
+    connect(PerfectLink)(plink -> beb);
+    connect(Bootstrapping)(boot -> beb);
+    //Bootstrap
+    connect[Timer](timer -> boot);
+    connect(PerfectLink)(plink -> boot);
+    // Overlay
+    connect(Bootstrapping)(boot -> overlay);
+    connect(PerfectLink)(plink -> overlay);
+    connect(BestEffortBroadcast)(beb -> overlay);
+    connect(BallotLeaderElection)(gle -> overlay);
+    // LeaderElection
+    connect(Bootstrapping)(boot -> gle);
+    connect(PerfectLink)(plink -> gle);
+    connect[Timer](timer -> gle);
+    // KV
+  //  connect(Bootstrapping)(boot -> kv);
+    connect(Routing)(overlay -> kv);
+    connect(PerfectLink)(plink -> kv);
+    //connect[BestEffortBroadcast](beb -> kv);
+    connect(SequenceConsensus)(seqpax -> kv);
+    // Pax
+    connect(PerfectLink)(plink -> seqpax);
+    connect(BestEffortBroadcast)(beb -> seqpax);
+    connect(Bootstrapping)(boot -> seqpax);
+    connect(BallotLeaderElection)(gle -> seqpax);
+    connect[Timer](timer -> seqpax);
+
+  }
 }

@@ -1,54 +1,18 @@
 package se.kth.id2203.components.GLE
 
+import se.kth.id2203._
 import se.kth.id2203.bootstrapping.{BLELookUp, Bootstrapping}
-import se.kth.id2203.components.GLEComponents._
+import se.kth.id2203.components.NetworkComponents._
 import se.kth.id2203.networking.NetAddress
-import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
-import se.kth.id2203.overlay.{LookupTable, Routing}
-import se.sics.kompics.network._
+import se.kth.id2203.overlay.LookupTable
+import se.kth.{PL_Deliver, PL_Send, PerfectLink}
 import se.sics.kompics.sl._
 import se.sics.kompics.timer.{ScheduleTimeout, Timer}
 
-
-import scala.collection.mutable;
-
-
-
+import scala.collection.mutable
+//TODO remodelling
 class GossipLeaderElection extends ComponentDefinition {
-
-  val ble = provides[BallotLeaderElection];
-  val pl = requires[PerfectLink];
-  val timer = requires[Timer];
-
-  val boot = requires(Bootstrapping)
-
-  val route = requires(Routing)
-
-  val self = cfg.getValue[NetAddress]("id2203.project.address");
-
-  var topology : List[NetAddress] = List.empty
-  var delta : Long = 0l
-  var majority = (topology.size / 2) + 1
-
-  private var period : Long = 0l
-  private var ballots = mutable.Map.empty[NetAddress, Long]
-
-  private var round = 0l
-  private var ballot = ballotFromNAddress(0, self)
-
-  private var leader: Option[(Long, Address)] = None
-  private var highestBallot: Long = ballot
-
-  private var topProcess : NetAddress = self
-  private var topBallot : Long = 0l
-  private var top = (self -> 0l)
   private val ballotOne = 0x0100000000l;
-
-  private def startTimer(delay: Long): Unit = {
-    val scheduledTimeout = new ScheduleTimeout(period)
-    scheduledTimeout.setTimeoutEvent(CheckTimeout(scheduledTimeout))
-    trigger(scheduledTimeout -> timer)
-  }
 
   def ballotFromNAddress(n: Int, adr: NetAddress): Long = {
     val nBytes = com.google.common.primitives.Ints.toByteArray(n);
@@ -66,23 +30,49 @@ class GossipLeaderElection extends ComponentDefinition {
   def incrementBallot(ballot: Long): Long = {
     ballot + ballotOne
   }
-  private def findtop()
+
+  val ble = provides(BallotLeaderElection);
+  val pl = requires(PerfectLink);
+  val timer = requires[Timer];
+  val boot = requires(Bootstrapping)
+
+  val self = cfg.getValue[NetAddress]("id2203.project.address");
+  var topology :List[NetAddress] = List.empty
+  // CURRENT PARTITION FOR LOOKUP TABLE
+  var delta :Long = 200l;
+  var majority = (topology.size / 2) + 1;
+
+  private var period :Long = 200l;
+  private var ballots = mutable.Map.empty[NetAddress, Long];
+  private var round = 0l;
+  private var ballot = ballotFromNAddress(0, self);
+  private var leader: Option[(Long, NetAddress)] = None;
+  private var highestBallot: Long = ballot;
+  private var topProcess = self
+  private var topBallot : Long = 0l
+  private var top = (self -> 0l)
+
+  private def startTimer(delay: Long): Unit = {
+    val scheduledTimeout = new ScheduleTimeout(period);
+    scheduledTimeout.setTimeoutEvent(CheckTimeout(scheduledTimeout));
+    trigger(scheduledTimeout -> timer);
+  }
+
+  private def lookUpTop()
   {
-    //TODO CHANGES SCHEME
     topProcess = self
     topBallot = 0l
     top = (self -> 0l)
-    var ballottocheck = ballots + (self -> ballot)
-    top = ballottocheck.maxBy(_._2)
+    var check = ballots + (self -> ballot)
+    top = check.maxBy(_._2)
     topProcess = top._1
     topBallot = top._2
 
   }
 
   private def checkLeader() {
-    /* INSERT YOUR CODE HERE */
 
-    findtop()
+    lookUpTop()
     if (topBallot < highestBallot)
     {
       while (ballot <= highestBallot)
@@ -96,58 +86,94 @@ class GossipLeaderElection extends ComponentDefinition {
       highestBallot = topBallot
       leader = Option(topBallot -> topProcess)
       trigger(BLE_Leader(topProcess, topBallot) -> ble);
-
     }
+    println("BLE -> checkLeader : "+leader)
 
 
   }
 
   boot uponEvent {
-    case BLELookUp(table: LookupTable) => handle {
+    case BLELookUp(lut: LookupTable) => handle {
 
-      for( p <- table.partitions.keySet; if table.partitions.contains(p))
+      println("BLE Lookup")
+
+      //Going through all the partitions and finding the one that contains the current node, which will represent
+      //the table topology (the set of node for the an instance of a leader election)
+
+
+      //Better way of doing (uncomment when you are sure that the project work): :)
+
+
+      //topology ++= (lut.partitions.keySet).filter(x => lut.partitions(x).contains(self))
+
+      for (partition <- lut.partitions.keySet)
+      {
+          if (lut.partitions(partition).contains(self))
         {
-          topology ++= table.partitions(p)
+            topology ++= lut.partitions(partition)
         }
-      startTimer(period);
+      }
+
+      majority = (topology.size / 2) + 1
+      round = 0
+      ballots = mutable.Map.empty[NetAddress, Long]
+      ballot = ballotFromNAddress(0, self)
+      leader = None
+      highestBallot = ballot
+      period = delta
+      startTimer(period)
     }
   }
 
   timer uponEvent {
     case CheckTimeout(_) => handle {
       /* INSERT YOUR CODE HERE */
-      if(ballots.size + 1 > majority)
-        checkLeader()
-      ballots = mutable.Map.empty[NetAddress, Long];
-      round += 1
-      for( p <- topology)
+
+      println("BLE -> Timer")
+      if (ballots.size +1 >=  majority  ) //we have three nodes per partition
       {
-        if(p != self )
+        println("BLE -> Timer -> ballotSize > Majority")
+        checkLeader()
+      }
+      ballots = mutable.Map.empty[NetAddress, Long]
+      round = round + 1
+      for (p <- topology)
+      {
+        if (p != self)
         {
-          trigger(PL_Send(p,HeartbeatReq(round, highestBallot)) -> pl)
+          trigger(PL_Send(p, HeartbeatReq(round, highestBallot)) -> pl)
         }
       }
       startTimer(period)
+
+
     }
   }
 
   pl uponEvent {
     case PL_Deliver(src, HeartbeatReq(r, hb)) => handle {
       /* INSERT YOUR CODE HERE */
-      if( hb > highestBallot)
+
+      if (hb > highestBallot)
       {
         highestBallot = hb
       }
-      trigger(PL_Send(src,HeartbeatResp(r, ballot)) -> pl)
+      trigger(PL_Send(src, HeartbeatResp(r, ballot)) -> pl)
+      println("BLE -> PL Deliver to : "+src)
+
     }
     case PL_Deliver(src, HeartbeatResp(r, b)) => handle {
       /* INSERT YOUR CODE HERE */
-      if(r == round)
+
+
+      if (r == round)
       {
         ballots += (src -> b)
       }
       else
-        period += delta
+      {
+        period = period + delta
+      }
     }
   }
 }

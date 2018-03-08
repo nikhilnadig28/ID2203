@@ -24,57 +24,83 @@
 package se.kth.id2203.overlay;
 
 import com.larskroll.common.collections._
-import java.util.Collection
-
 import se.kth.id2203.bootstrapping.NodeAssignment
 import se.kth.id2203.networking.NetAddress
+import scala.collection.mutable.ListBuffer
 
-import scala.collection.mutable.ListBuffer;
+///TODO BAHUT IMPORTANT Beautify karo
 
 @SerialVersionUID(0x57bdfad1eceeeaaeL)
 class LookupTable extends NodeAssignment with Serializable {
 
-  val partitions = TreeSetMultiMap.empty[Int, NetAddress];
+
+  val partitions = TreeSetMultiMap.empty[Int, NetAddress]
+  val replicationFactor : Int = 3 ///Each replication will have 5 nodes
 
   def lookup(key: String): Iterable[NetAddress] = {
-    val keyHash = key.hashCode();
-    val partition = partitions.floor(keyHash) match {
-      case Some(k) => k
-      case None    => partitions.lastKey
+    val keyInt = key.toInt
+    var finalVal = 0
+    for (key <- partitions.keySet)
+    {
+      println(s"The current loop is ${key} and the key is ${keyInt}")
+      if (keyInt > key && keyInt <= (key+1000))
+      {
+        println("key pool found")
+        finalVal = key
+      }
     }
-    return partitions(partition);
+
+    println(s"The key pool is ${finalVal}  ")
+    println(s" The size of the returned partitions is ${partitions(finalVal).size} ")
+    return partitions(finalVal)
   }
+
 
   def getNodes(): Set[NetAddress] = partitions.foldLeft(Set.empty[NetAddress]) {
     case (acc, kv) => acc ++ kv._2
   }
 
+
+
   override def toString(): String = {
-    val sb = new StringBuilder();
-    sb.append("LookupTable(\n");
-    sb.append(partitions.mkString(","));
-    sb.append(")");
-    return sb.toString();
+    val sb = new StringBuilder()
+    sb.append("LookupTable(\n")
+    sb.append(partitions.mkString(","))
+    sb.append(")")
+    return sb.toString()
   }
 
 }
 
 object LookupTable {
-  def generate(nodes: Set[NetAddress]) :  LookupTable = {
+  def generate(nodes: Set[NetAddress]): LookupTable = {
 
     val lut = new LookupTable()
-
-    var tempnodes : Set[NetAddress] = nodes
     var l : Int = 0
-
-
-    while(tempnodes.nonEmpty)
+    var tempStore : ListBuffer[NetAddress] = new ListBuffer[NetAddress]
+    tempStore.clear()
+    var i : Int = 0
+    var range  = 1000 * nodes.size
+    for (node <- nodes)
     {
-      val temp : Set[NetAddress] = tempnodes.take(3)
-      tempnodes = tempnodes -- temp
-      lut.partitions ++= ((l) -> temp)
-      l += 500
+      if (i < lut.replicationFactor)
+      {
+        tempStore.append(node)
+        i += 1
+      }
+      if (i == lut.replicationFactor)
+      {
+        lut.partitions ++= ( (l)    -> tempStore)
+        println("I am inside")
+        tempStore.clear()
+        i = 0
+        l += 2000
+      }
+      println(s"The temp store size is ${tempStore.size}")
+      println(s"The partitions are of number ${lut.partitions.size}")
+      //key range for each partition
     }
+    println(s"The partitions are of number ${lut.partitions.size}")
     lut
   }
 }

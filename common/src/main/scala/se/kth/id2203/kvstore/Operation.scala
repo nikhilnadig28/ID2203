@@ -25,24 +25,7 @@ package se.kth.id2203.kvstore
 
 import java.util.UUID
 
-import se.kth.id2203.kvstore.OpCode.{Ok, OpCode}
-import se.kth.id2203.networking.NetAddress
-import se.sics.kompics.KompicsEvent
-
-
-//trait Operation extends KompicsEvent {
-//  def id: String;
-//  def key: String;
-//  def clientAddress: NetAddress
-//  def generateID() = {
-//    UUID.randomUUID().toString
-//  }
-//}
-
-//@SerialVersionUID(0xfacc6612da2139eaL)
-//case class Op(key: String, id: UUID = UUID.randomUUID()) extends Operation with Serializable {
-//  def response(status: OpCode.OpCode): OpResponse = OpResponse(id, status);
-//}
+import se.sics.kompics.KompicsEvent;
 
 object OpCode {
 
@@ -62,7 +45,6 @@ trait Operation extends KompicsEvent {
   def key : String;
   def requestType: String;
   def value : Option[String]
-  def refVal : Option[String]
   def newVal : Option[String]
 
 }
@@ -74,10 +56,40 @@ trait OperationResponse extends KompicsEvent {
 }
 
 @SerialVersionUID(0xfacc6612da2139eaL)
-case class Op(key: String, id: UUID = UUID.randomUUID(), requestType : String ,   value : Option[String] = None ,
-                refVal : Option[String] = None,  newVal : Option[String] = None) extends Operation with Serializable {
+case class Op(key: String, id: UUID = UUID.randomUUID(), requestType : String , value : Option[String] = None ,
+              newVal : Option[String] = None) extends Operation with Serializable {
   def response(status: OpCode.OpCode, response : String ): OpResponse = OpResponse(id, status, response);
 }
 
 @SerialVersionUID(0x0227a2aea45e5e75L)
 case class OpResponse(id: UUID, status: OpCode.OpCode, response : String) extends OperationResponse with Serializable;
+
+
+//trait Operation extends KompicsEvent {
+//  def id: UUID;
+//  def key: String;
+//  def request_type: String;
+//  def newval : Option[String]; //Same parameter used for put or cas
+//  def oldval : Option[String];
+//}
+//
+//@SerialVersionUID(0xfacc6612da2139eaL)
+//case class Op(key: String, id: UUID = UUID.randomUUID(), request_type: String, newval:  Option[String]=None, oldval:  Option[String]=None) extends Operation with Serializable {
+//  def response(status: OpCode.OpCode, answer: String): OpResponse = OpResponse(id, status, answer);
+//}
+//
+//object OpCode {
+//  sealed trait OpCode;
+//  case object Ok extends OpCode;
+//  case object NotFound extends OpCode;
+//  case object NotImplemented extends OpCode;
+//}
+//
+//trait OperationResponse extends KompicsEvent {
+//  def id: UUID;
+//  def status: OpCode.OpCode;
+//  def answer: String;
+//}
+//
+//@SerialVersionUID(0x0227a2aea45e5e75L)
+//case class OpResponse(id: UUID, status: OpCode.OpCode, answer:String) extends OperationResponse with Serializable;

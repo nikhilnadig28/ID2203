@@ -23,20 +23,15 @@
  */
 package se.kth.id2203.overlay;
 
-
-
-import scala.util.Random
+import se.kth._
 import se.kth.id2203.bootstrapping._
-import se.kth.id2203.components.EPFD.EPFDComponents.{EventuallyPerfectFailureDetector, Restore, Suspect}
-import se.kth.id2203.components.GLEComponents.BallotLeaderElection
-import se.kth.id2203.components.NetworkComponents.BestEffortBroadcast
-import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PL_Send2, PerfectLink}
-//import se.kth.id2203.kvstore.{OpResponse, OperationResponse}
+import se.kth.id2203.components.NetworkComponents.{BallotLeaderElection, BestEffortBroadcast}
 import se.kth.id2203.networking._
 import se.sics.kompics.sl._
 import se.sics.kompics.network.Network
 import se.sics.kompics.timer.Timer
 
+import scala.util.Random;
 
 /**
  * The V(ery)S(imple)OverlayManager.
@@ -44,12 +39,11 @@ import se.sics.kompics.timer.Timer
  * Keeps all nodes in a single partition in one replication group.
  * <p>
  * Note: This implementation does not fulfill the project task. You have to
-  * support multiple partitions!
+ * support multiple partitions!
  * <p>
  * @author Lars Kroll <lkroll@kth.se>
  */
 
-//TODO
 class VSOverlayManager extends ComponentDefinition {
 
   //******* Ports ******
@@ -58,37 +52,37 @@ class VSOverlayManager extends ComponentDefinition {
   val net = requires[Network];
   val timer = requires[Timer];
 
-  val epfd = requires[EventuallyPerfectFailureDetector]
-  val beb = requires[BestEffortBroadcast]
-  val gle = requires[BallotLeaderElection];
-  val pLink = requires[PerfectLink]
+  //val epfd = requires[EventuallyPerfectFailureDetector]
+  val beb = requires(BestEffortBroadcast)
+  val gle = requires(BallotLeaderElection);
+  val pLink = requires(PerfectLink)
   var suspect : Set[NetAddress] = Set()
   //******* Fields ******
   val self = cfg.getValue[NetAddress]("id2203.project.address");
   private var lut: Option[LookupTable] = None;
-  var range = (0,0)
+//  var range = (0,0)
   //******* Handlers ******
   boot uponEvent {
     case GetInitialAssignments(nodes) => handle {
-      log.info("Generating LookupTable...");
+      println("Generating LookupTable...");
       val lut = LookupTable.generate(nodes); //Is the nodes here the replication factor?
-      logger.debug("Generated assignments:\n$lut")
+      println(s"Generated assignments:\n$lut")
       trigger (new InitialAssignments(lut) -> boot);
     }
-    case Booted(assignment: LookupTable) => handle {
-      log.info("Got NodeAssignment, overlay ready.");
+    case BootKV(assignment: LookupTable) => handle {
+      println("Got NodeAssignment, overlay ready.");
       lut = Some(assignment);
     }
   }
 
-//  epfd uponEvent {
-//    case Suspect(add) => handle {
-//      suspect += add // Add the node when you suspect it to fail
-//    }
-//    case Restore(add) => handle {
-//      suspect -= add // Remove it when it restores
-//    }
-//  }
+  //  epfd uponEvent {
+  //    case Suspect(add) => handle {
+  //      suspect += add // Add the node when you suspect it to fail
+  //    }
+  //    case Restore(add) => handle {
+  //      suspect -= add // Remove it when it restores
+  //    }
+  //  }
 
   pLink uponEvent {
 
@@ -97,17 +91,19 @@ class VSOverlayManager extends ComponentDefinition {
       assert(!nodes.isEmpty);
       val i = Random.nextInt(nodes.size);
       val target = nodes.drop(i).head;
-      log.info(s"Forwarding message for key $key to $target");
-      trigger(PL_Send2(header, target, msg) -> pLink);
+      for (node <- nodes) {
+        println(s"Forwarding message for key $key to $node");
+        trigger(PL_Send2(header, node, msg) -> pLink);
+      }
     }
     case PL_Deliver(header, msg: Connect) => handle {
       lut match {
         case Some(l) => {
-          log.debug("Accepting connection request from ${header.src}");
+          println(s"Accepting connection request from ${header}");
           val size = l.getNodes().size;
-          trigger (PL_Send(header, msg.ack(size)) -> pLink);
+          trigger (PL_Send2(self, header, msg.ack(size)) -> pLink);
         }
-        case None => log.info("Rejecting connection request from ${header.src}, as system is not ready, yet.");
+        case None => println(s"Rejecting connection request from ${header}, as system is not ready, yet.");
       }
     }
   }
@@ -116,10 +112,78 @@ class VSOverlayManager extends ComponentDefinition {
     case RouteMsg(key, msg) => handle {
       val nodes = lut.get.lookup(key);
       assert(!nodes.isEmpty);
-      val i = Random.nextInt(nodes.size);
-      val target = nodes.drop(i).head;
-      log.info(s"Routing message for key $key to $target");
-      trigger (PL_Send(target, msg) -> pLink);
+      //      val i = Random.nextInt(nodes.size);
+      //      val target = nodes.drop(i).head;
+      println(s"routing message for $key to all nodes")
+      for (node <- nodes) {
+
+        trigger(PL_Send2(self, node, msg) -> pLink);
+      }
     }
   }
 }
+
+
+//class VSOverlayManager extends ComponentDefinition {
+//
+//  //******* Ports ******
+//  val route = provides(Routing);
+//  val boot = requires(Bootstrapping);
+//  //val net = requires[Network];
+//  val timer = requires[Timer];
+//  val pl = requires(PerfectLink);
+//  val beb = requires(BestEffortBroadcast);
+//  val ble = requires(BallotLeaderElection);
+//  //******* Fields ******
+//  val self = cfg.getValue[NetAddress]("id2203.project.address");
+//  private var lut: Option[LookupTable] = None;
+//  //******* Handlers ******
+//  boot uponEvent {
+//    case GetInitialAssignments(nodes) => handle {
+//      log.info("Generating LookupTable...");
+//      val lut = LookupTable.generate(nodes);
+//      logger.debug("Generated assignments:\n$lut");
+//      trigger (new InitialAssignments(lut) -> boot);
+//    }
+//    case Booted(assignment: LookupTable) => handle {
+//      log.info("Got NodeAssignment, overlay ready.");
+//      lut = Some(assignment);
+//    }
+//  }
+//
+//  pl uponEvent {
+//    case PL_Deliver(header, RouteMsg(key, msg)) => handle {
+//      val nodes = lut.get.lookup(key);
+//      assert(!nodes.isEmpty);
+//      val i = Random.nextInt(nodes.size);
+//      val target = nodes.drop(i).head;
+//      log.info(s"Forwarding message for key $key to $target");
+//      trigger(PL_Original_Sender(header, target, msg) -> pl); //Difference with pl send is that it is not the current component that sends
+//    }
+//    case PL_Deliver(header, msg: Connect) => handle {
+//      lut match {
+//        case Some(l) => {
+//          log.debug("Accepting connection request from ${header.src}");
+//          val size = l.getNodes().size;
+//          trigger (PL_Original_Sender(self, header, msg.ack(size)) -> pl);
+//        }
+//        case None => log.info("Rejecting connection request from ${header.src}, as system is not ready, yet.");
+//      }
+//    }
+//  }
+//
+//
+//
+//  //This will change for leader election/perfect failure detector
+//
+//  route uponEvent {
+//    case RouteMsg(key, msg) => handle {
+//      val nodes = lut.get.lookup(key);
+//      assert(!nodes.isEmpty);
+//      val i = Random.nextInt(nodes.size);
+//      val target = nodes.drop(i).head;
+//      log.info(s"Routing message for key $key to $target");
+//      trigger (PL_Original_Sender(self, target, msg) -> pl);
+//    }
+//  }
+//}

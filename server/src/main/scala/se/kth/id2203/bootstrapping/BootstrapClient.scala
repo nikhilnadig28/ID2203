@@ -24,43 +24,42 @@
 package se.kth.id2203.bootstrapping;
 
 import java.util.UUID
-
-import se.kth.id2203.networking.PerfectLinkComponents.{PL_Deliver, PL_Send, PerfectLink}
+import se.kth.{PL_Deliver, PL_Send, PerfectLink}
 import se.kth.id2203.networking._
 import se.sics.kompics.sl._
 import se.sics.kompics.Start
-import se.sics.kompics.timer._;
+import se.sics.kompics.timer._
 
 object BootstrapClient {
-  sealed trait State;
-  case object Waiting extends State;
-  case object Started extends State;
+  sealed trait State
+  case object Waiting extends State
+  case object Started extends State
 }
 
-class BootstrapClient extends ComponentDefinition {
-  import BootstrapClient._;
+class  BootstrapClient extends ComponentDefinition {
+  import BootstrapClient._
 
   //******* Ports ******
-  val bootstrap = provides(Bootstrapping);
-  val timer = requires[Timer];
-  val pLink = requires[PerfectLink];
+  val bootstrap = provides(Bootstrapping)
+  val timer = requires[Timer]
+  val pLink = requires(PerfectLink)
   //******* Fields ******
-  val self = cfg.getValue[NetAddress]("id2203.project.address");
-  val server = cfg.getValue[NetAddress]("id2203.project.bootstrap-address");
+  val self = cfg.getValue[NetAddress]("id2203.project.address")
+  val server = cfg.getValue[NetAddress]("id2203.project.bootstrap-address")
 
-  private var state: State = Waiting;
+  private var state: State = Waiting
 
-  private var timeoutId: Option[UUID] = None;
+  private var timeoutId: Option[UUID] = None
 
   //******* Handlers ******
   ctrl uponEvent {
     case _: Start => handle {
-      log.debug("Starting bootstrap client on {}", self);
-      val timeout: Long = cfg.getValue[Long]("id2203.project.keepAlivePeriod");
-      val spt = new SchedulePeriodicTimeout(timeout, timeout);
-      spt.setTimeoutEvent(BSTimeout(spt));
-      trigger (spt -> timer);
-      timeoutId = Some(spt.getTimeoutEvent().getTimeoutId());
+      log.debug("Starting bootstrap client on {}", self)
+      val timeout: Long = cfg.getValue[Long]("id2203.project.keepAlivePeriod")
+      val spt = new SchedulePeriodicTimeout(timeout, timeout)
+      spt.setTimeoutEvent(BSTimeout(spt))
+      trigger (spt -> timer)
+      timeoutId = Some(spt.getTimeoutEvent().getTimeoutId())
     }
   }
 
@@ -68,32 +67,33 @@ class BootstrapClient extends ComponentDefinition {
     case BSTimeout(_) => handle {
       state match {
         case Waiting => {
-          trigger(PL_Send(server, CheckIn) -> pLink);
+          trigger(PL_Send(server, CheckIn) -> pLink)
         }
         case Started => {
-          trigger(PL_Send(server, Ready) -> pLink);
-          suicide();
+          trigger(PL_Send(server, Ready) -> pLink)
+          suicide()
         }
       }
     }
   }
 
   pLink uponEvent {
-    case PL_Deliver(header, Boot(assignment)) => handle {
+    case PL_Deliver(_, Boot(assignment)) => handle {  //changed to deliver
       state match {
         case Waiting => {
-          log.info("{} Booting up.", self);
-          trigger(Booted(assignment) -> bootstrap);
+          log.info("{} Booting up.", self)
+          trigger(Booted(assignment) -> bootstrap)
           trigger(BLELookUp(assignment) -> bootstrap)
-          trigger(SeqPaxLookUp(assignment) -> bootstrap)
+          trigger(BootKV(assignment) -> bootstrap)
           trigger(BEBLookUp(assignment) -> bootstrap)
+          trigger(SeqPaxLookUp(assignment) -> bootstrap)
 
           timeoutId match {
-            case Some(tid) => trigger(new CancelPeriodicTimeout(tid) -> timer);
+            case Some(tid) => trigger(new CancelPeriodicTimeout(tid) -> timer)
             case None      => // nothing to cancel
           }
-          trigger(PL_Send(server, Ready) -> pLink);
-          state = Started;
+          trigger(PL_Send(server, Ready) -> pLink) //changed to send
+          state = Started
         }
         case _ => // ignore
       }
@@ -102,7 +102,7 @@ class BootstrapClient extends ComponentDefinition {
 
   override def tearDown(): Unit = {
     timeoutId match {
-      case Some(tid) => trigger(new CancelPeriodicTimeout(tid) -> timer);
+      case Some(tid) => trigger(new CancelPeriodicTimeout(tid) -> timer)
       case None      => // nothing to cancel
     }
   }
